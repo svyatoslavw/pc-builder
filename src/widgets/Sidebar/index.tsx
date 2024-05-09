@@ -72,7 +72,7 @@ const SidebarItem = ({ Icon, text, active, alert, href }: ISidebarItem) => {
       <span
         className={cn("ml-3 text-sm flex-1 overflow-hidden text-gray-500 font-medium transition-all", {
           ["text-gray-800 font-semibold"]: active,
-          ["w-44 ml-3"]: expanded,
+          ["w-44 ml-3 z-50"]: expanded,
           ["hidden m-0"]: !expanded
         })}
       >

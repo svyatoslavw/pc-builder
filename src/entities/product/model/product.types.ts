@@ -16,7 +16,10 @@ export interface IComponent {
   graphics_card: IGraphicsCard | null
 }
 
-export type IAddToConstructorCategory = "processor" | "motherboard" | "graphicsCard" | "memory"
+export type IUpdateConstructor = {
+  id: string
+  name: string
+}
 
 export type IAddToConstructor = {
   id: string

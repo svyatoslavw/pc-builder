@@ -1,7 +1,7 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { v4 as uuidv4 } from "uuid"
 
-import { type IAddToConstructor, type IInitialState } from "./product.types"
+import { type IAddToConstructor, type IInitialState, IUpdateConstructor } from "./product.types"
 import { EnumCategory, type IGraphicsCard, type IMemory, type IMotherboard, type IProcessor } from "@/shared/lib/types"
 import { getPrice } from "@/shared/lib/utils"
 
@@ -23,6 +23,21 @@ export const productSlice = createSlice({
         },
         total: 0
       })
+    },
+    updateConstructor: (state, action: PayloadAction<IUpdateConstructor>) => {
+      const { id, name } = action.payload
+      const index = state.findIndex((build) => build.id === id)
+      if (index !== -1) {
+        state[index].name = name
+      }
+    },
+
+    deleteConstructor: (state, action: PayloadAction<string>) => {
+      const id = action.payload
+      const index = state.findIndex((build) => build.id === id)
+      if (index !== -1) {
+        state.splice(index, 1)
+      }
     },
     addToConstructor: (state, action: PayloadAction<IAddToConstructor>) => {
       const { id, category, component } = action.payload

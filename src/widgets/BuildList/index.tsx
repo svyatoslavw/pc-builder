@@ -1,22 +1,18 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { BuildItem } from "../BuildItem"
 
-import { BuildCard } from "@/entities/product/ui/BuildCard"
-import { useActions, useTypedSelector } from "@/shared/lib/hooks"
-import { Button } from "@/shared/ui/button"
-import { Card } from "@/shared/ui/card"
+import { useTypedSelector } from "@/shared/lib/hooks"
+import { Card, CardContent } from "@/shared/ui/card"
+import { Empty } from "@/shared/ui/empty"
 
 const BuildList = () => {
   const builds = useTypedSelector((state) => state.products)
-  const { createConstructor } = useActions()
-  const { push } = useRouter()
   return (
-    <Card className="grid grid-cols-6 filter gap-5 border-none rounded-none w-full p-5">
-      {builds.map((build) => (
-        <BuildCard key={build.id} build={build} />
-      ))}
-      <Button onClick={() => createConstructor()}>Create new System</Button>
+    <Card className="filter border-none overflow-y-auto rounded-none w-full p-5">
+      <CardContent className="grid grid-cols-custom gap-5 overflow-y-auto">
+        {builds ? builds.map((build) => <BuildItem key={build.id} build={build} />) : <Empty />}
+      </CardContent>
     </Card>
   )
 }

@@ -10,7 +10,9 @@ export default async function SystemBuilder({ searchParams }: { searchParams: { 
 
   return (
     <main className="w-full">
-      <DashboardHeader />
+      <div className="flex w-full">
+        <DashboardHeader />
+      </div>
       <Card className="flex border-none rounded-none">
         <CardContent className="filter w-72 flex flex-col border-0 border-r p-0 rounded-none">
           <CardDescription className="flex-1 px-2">

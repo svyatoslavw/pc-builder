@@ -1,23 +1,29 @@
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import React from "react"
 
 import type { IBuild } from "../model/product.types"
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/shared/ui/card"
+import { Card, CardContent, CardFooter } from "@/shared/ui/card"
 
-const BuildCard = ({ build }: { build: IBuild }) => {
+interface IBuildCardProps {
+  build: IBuild
+  children?: React.ReactNode
+}
+
+const BuildCard = ({ build, children }: IBuildCardProps) => {
   const { push } = useRouter()
 
   return (
-    <Card key={build.id} className="aspect-square">
-      <CardHeader className="font-semibold text-neutral-500">{build.name}</CardHeader>
-      <CardContent className="flex justify-center cursor-pointer scale-90 hover:scale-100 transition">
+    <Card key={build.id}>
+      {children}
+      <CardContent className="flex justify-center cursor-pointer scale-95 hover:scale-100 transition">
         <Image
           onClick={() => push(`/i/systems/${build.id}`)}
           alt={build.id}
           src={build.components.processor?.image_url || "/default-case.png"}
-          width={170}
-          height={170}
+          width={300}
+          height={300}
         />
       </CardContent>
       <CardFooter className="py-2 justify-between items-end text-neutral-500">
