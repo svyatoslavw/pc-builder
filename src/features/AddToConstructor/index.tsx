@@ -1,36 +1,46 @@
 "use client"
 
 import { CheckIcon, PlusIcon } from "lucide-react"
-import toast from "react-hot-toast"
+import { usePathname } from "next/navigation"
+import React from "react"
 
 import { useActions, useTypedSelector } from "@/shared/lib/hooks"
+import { useFilter } from "@/shared/lib/hooks/useFilters"
 import { IProduct } from "@/shared/lib/types"
+import { getBuildId } from "@/shared/lib/utils"
 import { Button } from "@/shared/ui/button"
 
-const AddToConstructor = ({ product }: { product: IProduct }) => {
+const AddToConstructor = React.memo(({ product }: { product: IProduct }) => {
+  const pathname = usePathname()
+  if (!pathname) return null
+
   const { addToConstructor } = useActions()
-  const { category, product: productState } = useTypedSelector((state) => state)
+  const { queryParams } = useFilter()
+  const products = useTypedSelector((state) => state.products)
 
-  const isSelectedProduct = productState[category.name] === product
+  const id = getBuildId(pathname)
+  const state = products.find((item) => item.id === id)
 
-  const AddToConstructorHandler = () => {
-    addToConstructor({ component: product, category: category.name })
-    toast.success("Component added successfully")
-  }
+  const isSelectedProduct = state && state.components[queryParams.component]?.id === product.id
 
+  const AddToConstructorHandler = React.useCallback(() => {
+    if (!isSelectedProduct) {
+      addToConstructor({ id, component: product, category: queryParams.component })
+      // toast.success("Component added!")
+    } else {
+      addToConstructor({ id, component: null, category: queryParams.component })
+      // toast.error("Component removed!")
+    }
+  }, [id, product, queryParams.component, isSelectedProduct])
   return (
     <Button
       onClick={AddToConstructorHandler}
       variant={isSelectedProduct ? "default" : "outline"}
-      className="absolute p-2 w-8 h-8 top-2 right-2"
+      className="absolute p-2 w-8 h-8 top-2 right-2 disabled:opacity-100"
     >
-      {isSelectedProduct ? (
-        <CheckIcon color="white" size={16} />
-      ) : (
-        <PlusIcon color="gray" size={16} />
-      )}
+      {isSelectedProduct ? <CheckIcon color="white" size={16} /> : <PlusIcon color="gray" size={16} />}
     </Button>
   )
-}
+})
 
 export { AddToConstructor }

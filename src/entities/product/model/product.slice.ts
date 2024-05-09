@@ -1,48 +1,66 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { v4 as uuidv4 } from "uuid"
 
 import { type IAddToConstructor, type IInitialState } from "./product.types"
-import {
-  EnumCategory,
-  type IGraphicsCard,
-  type IMemory,
-  type IMotherboard,
-  type IProcessor
-} from "@/shared/lib/types"
+import { EnumCategory, type IGraphicsCard, type IMemory, type IMotherboard, type IProcessor } from "@/shared/lib/types"
+import { getPrice } from "@/shared/lib/utils"
 
-const initialState: IInitialState = {
-  processor: null,
-  motherboard: null,
-  memory: null,
-  graphicsCard: null
-}
+const initialState: IInitialState = []
 
 export const productSlice = createSlice({
-  name: "product",
+  name: "products",
   initialState,
   reducers: {
+    createConstructor: (state) => {
+      state.push({
+        id: uuidv4(),
+        name: "My System " + (state.length + 1),
+        components: {
+          processor: null,
+          motherboard: null,
+          graphics_card: null,
+          memory: null
+        },
+        total: 0
+      })
+    },
     addToConstructor: (state, action: PayloadAction<IAddToConstructor>) => {
-      switch (action.payload.category) {
-        case EnumCategory.PROCESSOR:
-          state.processor = action.payload.component as IProcessor
-          break
-        case EnumCategory.MOTHERBOARD:
-          state.motherboard = action.payload.component as IMotherboard
-          break
-        case EnumCategory.MEMORY:
-          state.memory = action.payload.component as IMemory
-          break
-        case EnumCategory.GRAPHICSCARD:
-          state.graphicsCard = action.payload.component as IGraphicsCard
-          break
-        default:
-          break
+      const { id, category, component } = action.payload
+      const index = state.findIndex((build) => build.id === id)
+      if (index !== -1) {
+        const build = state[index]
+
+        switch (category) {
+          case EnumCategory.PROCESSOR:
+            build.components.processor = build.components.processor === component ? null : (component as IProcessor)
+            break
+          case EnumCategory.MOTHERBOARD:
+            build.components.motherboard = build.components.motherboard === component ? null : (component as IMotherboard)
+            break
+          case EnumCategory.MEMORY:
+            build.components.memory = build.components.memory === component ? null : (component as IMemory)
+            break
+          case EnumCategory.GRAPHICSCARD:
+            build.components.graphics_card = build.components.graphics_card === component ? null : (component as IGraphicsCard)
+            break
+          default:
+            break
+        }
+        build.total = getPrice(build.components)
       }
     },
-    resetConstructor: (state) => {
-      state.processor = null
-      state.motherboard = null
-      state.memory = null
-      state.graphicsCard = null
+    resetConstructor: (state, action: PayloadAction<string>) => {
+      const id = action.payload
+      const index = state.findIndex((build) => build.id === id)
+      if (index !== -1) {
+        const build = state[index]
+
+        build.components.processor = null
+        build.components.motherboard = null
+        build.components.memory = null
+        build.components.graphics_card = null
+        build.total = 0
+      }
     }
   }
 })

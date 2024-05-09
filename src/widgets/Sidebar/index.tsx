@@ -36,11 +36,7 @@ const SidebarContext = createContext<ISidebarContext>({ expanded: false })
 const UserInfo = ({ expanded }: { expanded: boolean }) => {
   return (
     <div className="flex">
-      <img
-        src="https://ui-avatars.com/api/?background=2563eb&color=1e3a8a&bold=true"
-        alt=""
-        className="w-10 h-10 rounded-md"
-      />
+      <img src="https://ui-avatars.com/api/?background=2563eb&color=1e3a8a&bold=true" alt="" className="w-10 h-10 rounded-md" />
       <div
         className={cn("flex justify-between items-center overflow-hidden transition-all", {
           ["w-44 ml-3"]: expanded,
@@ -63,13 +59,10 @@ const SidebarItem = ({ Icon, text, active, alert, href }: ISidebarItem) => {
   return (
     <Link
       href={href}
-      className={cn(
-        "relative flex items-center py-1.5 px-2 my-2 font-medium rounded-md cursor-pointer transition-colors group",
-        {
-          ["bg-gray-100"]: active,
-          ["hover:bg-gray-100"]: !active
-        }
-      )}
+      className={cn("relative flex items-center py-1.5 px-2 my-2 font-medium rounded-md cursor-pointer transition-colors group", {
+        ["bg-gray-100"]: active,
+        ["hover:bg-gray-100"]: !active
+      })}
     >
       <Icon
         className={cn("text-gray-500", {
@@ -77,14 +70,11 @@ const SidebarItem = ({ Icon, text, active, alert, href }: ISidebarItem) => {
         })}
       />
       <span
-        className={cn(
-          "ml-3 text-sm flex-1 overflow-hidden text-gray-500 font-medium transition-all",
-          {
-            ["text-gray-800 font-semibold"]: active,
-            ["w-44 ml-3"]: expanded,
-            ["hidden m-0"]: !expanded
-          }
-        )}
+        className={cn("ml-3 text-sm flex-1 overflow-hidden text-gray-500 font-medium transition-all", {
+          ["text-gray-800 font-semibold"]: active,
+          ["w-44 ml-3"]: expanded,
+          ["hidden m-0"]: !expanded
+        })}
       >
         {text}
       </span>
@@ -152,11 +142,7 @@ const Sidebar = () => {
             PC Builder
           </span>
           <Button variant={"ghost"} onClick={() => setExpanded((curr) => !curr)} className="p-1.5">
-            {expanded ? (
-              <CircleChevronLeft color="gray" size={20} />
-            ) : (
-              <CircleChevronRight color="gray" size={20} />
-            )}
+            {expanded ? <CircleChevronLeft color="gray" size={20} /> : <CircleChevronRight color="gray" size={20} />}
           </Button>
         </CardTitle>
 
@@ -168,12 +154,7 @@ const Sidebar = () => {
           </CardContent>
 
           <div className="border-t flex flex-col gap-4 p-3">
-            <SidebarItem
-              Icon={BellIcon}
-              text="Notifications"
-              href={"/i/notifications"}
-              active={pathname?.includes("notifications")}
-            />
+            <SidebarItem Icon={BellIcon} text="Notifications" href={"/i/notifications"} active={pathname?.includes("notifications")} />
             <UserInfo expanded={expanded} />
           </div>
         </SidebarContext.Provider>

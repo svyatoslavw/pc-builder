@@ -31,12 +31,7 @@ const HERO_INFO = [
   }
 ]
 
-const CHARACTERICTICS = [
-  "Premium Custom PC",
-  "Ready for High-Performance",
-  "Premium Full Steel Chassis",
-  "Streamer Friendly"
-]
+const CHARACTERICTICS = ["Premium Custom PC", "Ready for High-Performance", "Premium Full Steel Chassis", "Streamer Friendly"]
 
 const PC_COMPONENTS = [
   { title: "Processor", type: "Intel 10th Gen or Ryzen 3000 Processors" },
@@ -58,11 +53,7 @@ export default function Home() {
         </h1>
         <div className="flex gap-4 text-sm">
           {LINKS.map((link) => (
-            <Link
-              className="hover:text-primary/70 transition font-medium"
-              key={link.name}
-              href={link.href}
-            >
+            <Link className="hover:text-primary/70 transition font-medium" key={link.name} href={link.href}>
               {link.name}
             </Link>
           ))}

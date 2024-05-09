@@ -71,7 +71,7 @@ export const enum EnumCategory {
   PROCESSOR = "processor",
   MOTHERBOARD = "motherboard",
   MEMORY = "memory",
-  GRAPHICSCARD = "graphicsCard"
+  GRAPHICSCARD = "graphics_card"
 }
 
 export interface ICategory {

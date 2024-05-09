@@ -4,8 +4,6 @@ import Image from "next/image"
 import type { IProduct } from "../../../shared/lib/types"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "../../../shared/ui/card"
 
-import { AddToConstructor } from "@/features/AddToConstructor"
-
 const ProductCharacteristics = ({ product }: { product: IProduct }) => {
   const item = (label: string, value: string | number) => (
     <div className="text-xs px-2 py-1 border bg-gray-100 rounded">
@@ -20,12 +18,12 @@ const ProductCharacteristics = ({ product }: { product: IProduct }) => {
         {item("Threads", product.threads)}
       </>
     )
-  } else if ("chipset" in product && "size" in product && "type" in product) {
+  } else if ("chipset" in product && "sockets" in product && "compatible_ram" in product) {
     return (
       <>
         {item("Chipset", product.chipset)}
-        {item("GB", product.sockets)}
-        {item("Threads", product.compatible_ram)}
+        {item("", product.sockets)}
+        {item("", product.compatible_ram)}
       </>
     )
   } else if ("cooling" in product && "memory_size" in product && "memory_type" in product) {
@@ -49,12 +47,16 @@ const ProductCharacteristics = ({ product }: { product: IProduct }) => {
   }
 }
 
-const ProductCard = ({ product }: { product: IProduct }) => {
+interface IProductCardProps {
+  product: IProduct
+  children?: React.ReactNode
+}
+
+const ProductCard = ({ product, children }: IProductCardProps) => {
   return (
-    <Card className="relative h-fit">
-      <AddToConstructor product={product} />
-      <CardHeader className="font-semibold text-base">
-        <h3>{product.name}</h3>
+    <Card className="relative aspect-square">
+      <CardHeader className="font-semibold text-base h-28 pb-0">
+        <h3 className="line-clamp-2 w-5/6">{product.name}</h3>
         <div className="flex gap-1 text-xs items-center">
           <StarIcon size={16} color="black" fill="black" />
           {product.rating}
@@ -64,10 +66,10 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         <Image
           src={product.image_url}
           alt={product.name}
-          width={220}
-          height={220}
+          width={170}
+          height={170}
           draggable={false}
-          className="aspect-square object-cover"
+          className="aspect-square object-cover select-none"
         />
       </CardDescription>
       <CardContent className="flex flex-wrap gap-1 py-2">
@@ -75,15 +77,12 @@ const ProductCard = ({ product }: { product: IProduct }) => {
       </CardContent>
       <CardFooter className="flex justify-between items-end">
         <div className="flex items-end">
-          {product.in_stock ? (
-            <GlobeIcon size={18} className="text-green-600" />
-          ) : (
-            <GlobeLockIcon size={18} className="text-red-600" />
-          )}
+          {product.in_stock ? <GlobeIcon size={18} className="text-green-600" /> : <GlobeLockIcon size={18} className="text-red-600" />}
           <p className="ml-1 text-xs">{product.in_stock ? "In Stock" : "Not Available"} </p>
         </div>
         <p className="text-xl font-semibold underline">{product.price}$</p>
       </CardFooter>
+      {children}
     </Card>
   )
 }

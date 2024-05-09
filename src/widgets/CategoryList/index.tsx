@@ -1,5 +1,5 @@
-import { CategoryCard } from "@/entities/category/ui/CategoryCard"
 import { EnumCategory } from "@/shared/lib/types"
+import { CategoryItem } from "@/widgets/CategoryItem"
 
 const PC_COMPONENTS = [
   { id: "wdqder43167", name: "CPU", table: EnumCategory.PROCESSOR },
@@ -18,7 +18,7 @@ const CategoryList = () => {
   return (
     <div className="flex flex-col gap-1 my-2">
       {PC_COMPONENTS.map((category) => (
-        <CategoryCard category={category} key={category.id} />
+        <CategoryItem category={category} key={category.id} />
       ))}
     </div>
   )

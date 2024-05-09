@@ -1,24 +1,42 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
+import { persistStore } from "redux-persist"
 
-import { categorySlice } from "@/entities/category/model/category.slice"
+import { filtersSlice } from "@/entities/product/model/filter.slice"
 import { productSlice } from "@/entities/product/model/product.slice"
 
-const combinedReducers = combineReducers({
-  product: productSlice.reducer,
-  category: categorySlice.reducer
-})
+const isClient = typeof window !== "undefined"
 
 export const rootActions = {
   ...productSlice.actions,
-  ...categorySlice.actions
+  ...filtersSlice.actions
+}
+
+const combinedReducers = combineReducers({
+  products: productSlice.reducer,
+  filters: filtersSlice.reducer
+})
+
+let mainReducer = combinedReducers
+
+if (isClient) {
+  const { persistReducer } = require("redux-persist")
+  const storage = require("redux-persist/lib/storage").default
+
+  const persistConfig = {
+    key: "builder",
+    storage
+  }
+
+  mainReducer = persistReducer(persistConfig, combinedReducers)
 }
 
 export const store = configureStore({
-  reducer: combinedReducers,
+  reducer: mainReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false
     })
 })
+export const persistor = persistStore(store)
 
 export type TypeRootState = ReturnType<typeof combinedReducers>
