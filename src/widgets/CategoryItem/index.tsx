@@ -15,12 +15,12 @@ const CategoryItem = React.memo(({ category }: { category: ICategory }) => {
   if (!pathname) return null
 
   const { updateQueryParams } = useFilter()
-  const products = useTypedSelector((state) => state.products)
+  const builds = useTypedSelector((state) => state.builds)
 
   const id = getBuildId(pathname)
-  const product = products.find((item) => item.id === id)
+  const build = builds.find((item) => item.id === id)
 
-  const isSelected = React.useMemo(() => product && product.components[category.table], [product])
+  const isSelected = React.useMemo(() => build && build.components[category.table], [build])
 
   const selectCategoryHandler = () => {
     updateQueryParams("component", category.table)

@@ -3,20 +3,20 @@
 import { CheckIcon } from "lucide-react"
 import React from "react"
 
-import type { IBuild } from "@/entities/product/model/product.types"
+import type { IBuild } from "@/entities/product/model/build.types"
 import { useActions } from "@/shared/lib/hooks"
 import { useOutside } from "@/shared/lib/hooks/useOutside"
 import { Button } from "@/shared/ui/button"
 import { CardHeader } from "@/shared/ui/card"
 import { Input } from "@/shared/ui/input"
 
-const RenameSystem = ({ build }: { build: IBuild }) => {
-  const { updateConstructor } = useActions()
+const RenameBuild = ({ build }: { build: IBuild }) => {
+  const { updateBuildName } = useActions()
   const [value, setValue] = React.useState("")
   const { ref, isActive, setIsActive } = useOutside(false)
 
   const updateNameHandler = (id: string, name: string) => {
-    updateConstructor({ id, name })
+    updateBuildName({ id, name })
     setIsActive(false)
   }
   return (
@@ -48,4 +48,4 @@ const RenameSystem = ({ build }: { build: IBuild }) => {
   )
 }
 
-export default RenameSystem
+export { RenameBuild }

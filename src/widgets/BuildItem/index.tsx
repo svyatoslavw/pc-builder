@@ -1,11 +1,11 @@
-import type { IBuild } from "@/entities/product/model/product.types"
-import { BuildCard } from "@/entities/product/ui/BuildCard"
-import RenameSystem from "@/features/RenameSystem"
+import { BuildCard } from "@/entities/build/ui/BuildCard"
+import { RenameBuild } from "@/features/RenameBuild"
+import type { IBuild } from "@/shared/lib/types"
 
 const BuildItem = ({ build }: { build: IBuild }) => {
   return (
     <BuildCard build={build}>
-      <RenameSystem build={build} />
+      <RenameBuild build={build} />
     </BuildCard>
   )
 }

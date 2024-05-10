@@ -1,18 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { persistStore } from "redux-persist"
 
-import { filtersSlice } from "@/entities/product/model/filter.slice"
-import { productSlice } from "@/entities/product/model/product.slice"
+import { buildSlice } from "@/entities/build/model/build.slice"
+import { filtersSlice } from "@/entities/build/model/filter.slice"
 
 const isClient = typeof window !== "undefined"
 
 export const rootActions = {
-  ...productSlice.actions,
+  ...buildSlice.actions,
   ...filtersSlice.actions
 }
 
 const combinedReducers = combineReducers({
-  products: productSlice.reducer,
+  builds: buildSlice.reducer,
   filters: filtersSlice.reducer
 })
 

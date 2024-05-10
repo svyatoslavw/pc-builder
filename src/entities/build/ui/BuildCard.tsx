@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import React from "react"
 
-import type { IBuild } from "../model/product.types"
+import type { IBuild } from "../model/build.types"
 
 import { Card, CardContent, CardFooter } from "@/shared/ui/card"
 
@@ -21,7 +21,7 @@ const BuildCard = ({ build, children }: IBuildCardProps) => {
         <Image
           onClick={() => push(`/i/systems/${build.id}`)}
           alt={build.id}
-          src={build.components.processor?.image_url || "/default-case.png"}
+          src={build.components.case?.image_url || "/default-case.png"}
           width={300}
           height={300}
         />

@@ -3,6 +3,7 @@
 import { CheckIcon, PlusIcon } from "lucide-react"
 import { usePathname } from "next/navigation"
 import React from "react"
+import toast from "react-hot-toast"
 
 import { useActions, useTypedSelector } from "@/shared/lib/hooks"
 import { useFilter } from "@/shared/lib/hooks/useFilters"
@@ -14,24 +15,24 @@ const AddToConstructor = React.memo(({ product }: { product: IProduct }) => {
   const pathname = usePathname()
   if (!pathname) return null
 
-  const { addToConstructor } = useActions()
+  const { addComponentToBuild } = useActions()
   const { queryParams } = useFilter()
-  const products = useTypedSelector((state) => state.products)
+  const builds = useTypedSelector((state) => state.builds)
 
   const id = getBuildId(pathname)
-  const state = products.find((item) => item.id === id)
+  const state = builds.find((item) => item.id === id)
 
-  const isSelectedProduct = state && state.components[queryParams.component]?.id === product.id
+  const isSelectedProduct = React.useMemo(() => state && state.components[queryParams.component]?.id === product.id, [product, state])
 
   const AddToConstructorHandler = React.useCallback(() => {
     if (!isSelectedProduct) {
-      addToConstructor({ id, component: product, category: queryParams.component })
-      // toast.success("Component added!")
+      addComponentToBuild({ id, component: product, category: queryParams.component })
+      toast.success("Component added!")
     } else {
-      addToConstructor({ id, component: null, category: queryParams.component })
-      // toast.error("Component removed!")
+      addComponentToBuild({ id, component: null, category: queryParams.component })
+      toast.error("Component removed!")
     }
-  }, [id, product, queryParams.component, isSelectedProduct])
+  }, [id, isSelectedProduct])
   return (
     <Button
       onClick={AddToConstructorHandler}

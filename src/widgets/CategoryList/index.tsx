@@ -5,7 +5,8 @@ const PC_COMPONENTS = [
   { id: "wdqder43167", name: "CPU", table: EnumCategory.PROCESSOR },
   { id: "54365238ffwe", name: "Motherboard", table: EnumCategory.MOTHERBOARD },
   { id: "32ed32g563", name: "Grapphics Card", table: EnumCategory.GRAPHICSCARD },
-  { id: "45543dfdc343", name: "Memory", table: EnumCategory.MEMORY }
+  { id: "45543dfdc343", name: "Memory", table: EnumCategory.MEMORY },
+  { id: "32432432423", name: "Case", table: EnumCategory.CASE }
   // { key: "Hard Drives", value: "Hard Drives" },
   // { key: "Case/Housing", value: "Case/Housing" },
   // { key: "Power Supply", value: "Power Supply" },

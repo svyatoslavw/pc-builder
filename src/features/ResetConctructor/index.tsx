@@ -4,7 +4,7 @@ import { Trash2Icon } from "lucide-react"
 import { usePathname } from "next/navigation"
 import toast from "react-hot-toast"
 
-import { useActions, useTypedSelector } from "@/shared/lib/hooks"
+import { useActions } from "@/shared/lib/hooks"
 import { getBuildId } from "@/shared/lib/utils"
 import { Button } from "@/shared/ui/button"
 
@@ -13,9 +13,8 @@ const ResetConctructor = () => {
   if (!pathname) return null
 
   const { resetConstructor } = useActions()
-  const products = useTypedSelector((state) => state.products)
-
   const id = getBuildId(pathname)
+
   const resetConctructorHandler = () => {
     resetConstructor(id)
     toast.success("Constructor cleared!")

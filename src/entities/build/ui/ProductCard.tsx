@@ -62,14 +62,14 @@ const ProductCard = ({ product, children }: IProductCardProps) => {
           {product.rating}
         </div>
       </CardHeader>
-      <CardDescription className="flex justify-center">
+      <CardDescription className="flex justify-center h-56">
         <Image
           src={product.image_url}
           alt={product.name}
-          width={170}
-          height={170}
+          width={220}
+          height={220}
           draggable={false}
-          className="aspect-square object-cover select-none"
+          className="object-contain select-none"
         />
       </CardDescription>
       <CardContent className="flex flex-wrap gap-1 py-2">

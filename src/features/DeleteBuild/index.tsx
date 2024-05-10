@@ -8,10 +8,10 @@ import { Button } from "@/shared/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/ui/dialog"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/ui/select"
 
-const DeleteSystem = () => {
-  const { deleteConstructor } = useActions()
+const DeleteBuild = () => {
+  const { deleteBuild } = useActions()
   const [item, setItem] = React.useState("")
-  const products = useTypedSelector((state) => state.products)
+  const builds = useTypedSelector((state) => state.builds)
 
   console.log("@item", item)
 
@@ -19,7 +19,7 @@ const DeleteSystem = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant={"outline"} className="gap-2 text-sm">
-          <FileMinus2Icon size={18} /> Delete
+          <FileMinus2Icon size={18} /> Delete System
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -35,9 +35,9 @@ const DeleteSystem = () => {
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Systems</SelectLabel>
-                {products.map((product) => (
-                  <SelectItem key={product.id} value={product.id}>
-                    {product.name}
+                {builds.map((build) => (
+                  <SelectItem key={build.id} value={build.id}>
+                    {build.name}
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -45,7 +45,7 @@ const DeleteSystem = () => {
           </Select>
         </div>
         <DialogClose disabled={!item}>
-          <Button disabled={!item} type="submit" onClick={() => deleteConstructor(item)}>
+          <Button disabled={!item} type="submit" onClick={() => deleteBuild(item)}>
             Delete system
           </Button>
         </DialogClose>
@@ -54,4 +54,4 @@ const DeleteSystem = () => {
   )
 }
 
-export { DeleteSystem }
+export { DeleteBuild }

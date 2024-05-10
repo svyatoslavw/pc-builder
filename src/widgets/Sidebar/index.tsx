@@ -17,6 +17,7 @@ import React, { createContext, useContext, useState } from "react"
 import { Button } from "../../shared/ui/button"
 import { Card, CardContent, CardTitle } from "../../shared/ui/card"
 
+import { IUser } from "@/shared/lib/types"
 import { cn } from "@/shared/lib/utils"
 
 interface ISidebarItem {
@@ -33,10 +34,10 @@ interface ISidebarContext {
 
 const SidebarContext = createContext<ISidebarContext>({ expanded: false })
 
-const UserInfo = ({ expanded }: { expanded: boolean }) => {
+const UserInfo = ({ expanded, user }: { expanded: boolean; user: IUser }) => {
   return (
     <div className="flex">
-      <img src="https://ui-avatars.com/api/?background=2563eb&color=1e3a8a&bold=true" alt="" className="w-10 h-10 rounded-md" />
+      <img src="https://ui-avatars.com/api/?background=2563eb&color=ffffff&bold=true&name=S+S" alt="" className="w-10 h-10 rounded-md" />
       <div
         className={cn("flex justify-between items-center overflow-hidden transition-all", {
           ["w-44 ml-3"]: expanded,
@@ -44,8 +45,8 @@ const UserInfo = ({ expanded }: { expanded: boolean }) => {
         })}
       >
         <div className="leading-4">
-          <h4 className="font-semibold">John Doe</h4>
-          <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+          <h4 className="font-semibold">Sviatoslav</h4>
+          <span className="text-xs text-gray-600">{user.email}</span>
         </div>
         <MoreVertical size={20} />
       </div>
@@ -102,7 +103,7 @@ const SidebarItem = ({ Icon, text, active, alert, href }: ISidebarItem) => {
   )
 }
 
-const Sidebar = () => {
+const Sidebar = ({ user }: { user: IUser }) => {
   const pathname = usePathname()
   const [expanded, setExpanded] = useState(true)
 
@@ -155,7 +156,7 @@ const Sidebar = () => {
 
           <div className="border-t flex flex-col gap-4 p-3">
             <SidebarItem Icon={BellIcon} text="Notifications" href={"/i/notifications"} active={pathname?.includes("notifications")} />
-            <UserInfo expanded={expanded} />
+            <UserInfo user={user} expanded={expanded} />
           </div>
         </SidebarContext.Provider>
       </Card>

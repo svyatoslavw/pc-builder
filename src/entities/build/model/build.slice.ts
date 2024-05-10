@@ -1,17 +1,17 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { v4 as uuidv4 } from "uuid"
 
-import { type IAddToConstructor, type IInitialState, IUpdateConstructor } from "./product.types"
-import { EnumCategory, type IGraphicsCard, type IMemory, type IMotherboard, type IProcessor } from "@/shared/lib/types"
+import { type IAddToConstructor, type IInitialState, IUpdateConstructor } from "./build.types"
+import { EnumCategory, type ICase, type IGraphicsCard, type IMemory, type IMotherboard, type IProcessor } from "@/shared/lib/types"
 import { getPrice } from "@/shared/lib/utils"
 
 const initialState: IInitialState = []
 
-export const productSlice = createSlice({
-  name: "products",
+export const buildSlice = createSlice({
+  name: "builds",
   initialState,
   reducers: {
-    createConstructor: (state) => {
+    createBuild: (state) => {
       state.push({
         id: uuidv4(),
         name: "My System " + (state.length + 1),
@@ -19,12 +19,13 @@ export const productSlice = createSlice({
           processor: null,
           motherboard: null,
           graphics_card: null,
-          memory: null
+          memory: null,
+          case: null
         },
         total: 0
       })
     },
-    updateConstructor: (state, action: PayloadAction<IUpdateConstructor>) => {
+    updateBuildName: (state, action: PayloadAction<IUpdateConstructor>) => {
       const { id, name } = action.payload
       const index = state.findIndex((build) => build.id === id)
       if (index !== -1) {
@@ -32,14 +33,14 @@ export const productSlice = createSlice({
       }
     },
 
-    deleteConstructor: (state, action: PayloadAction<string>) => {
+    deleteBuild: (state, action: PayloadAction<string>) => {
       const id = action.payload
       const index = state.findIndex((build) => build.id === id)
       if (index !== -1) {
         state.splice(index, 1)
       }
     },
-    addToConstructor: (state, action: PayloadAction<IAddToConstructor>) => {
+    addComponentToBuild: (state, action: PayloadAction<IAddToConstructor>) => {
       const { id, category, component } = action.payload
       const index = state.findIndex((build) => build.id === id)
       if (index !== -1) {
@@ -58,6 +59,9 @@ export const productSlice = createSlice({
           case EnumCategory.GRAPHICSCARD:
             build.components.graphics_card = build.components.graphics_card === component ? null : (component as IGraphicsCard)
             break
+          case EnumCategory.CASE:
+            build.components.case = build.components.case === component ? null : (component as ICase)
+            break
           default:
             break
         }
@@ -74,6 +78,7 @@ export const productSlice = createSlice({
         build.components.motherboard = null
         build.components.memory = null
         build.components.graphics_card = null
+        build.components.case = null
         build.total = 0
       }
     }

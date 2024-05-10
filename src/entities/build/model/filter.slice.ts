@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 import { IFilterState, iFilterActiontsPayload } from "./filter.types"
 import { EnumCategory } from "@/shared/lib/types"
+import { setPrevToLS } from "@/shared/lib/utils"
 
 const initialState: IFilterState = {
   isFilterUpdated: false,
@@ -19,6 +20,7 @@ export const filtersSlice = createSlice({
       const { key, value } = action.payload
       if (key === "component") {
         state.queryParams[key] = value as EnumCategory
+        setPrevToLS(state.queryParams[key])
       } else {
         state.queryParams[key] = value
       }

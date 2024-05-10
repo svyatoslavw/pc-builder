@@ -98,7 +98,7 @@ export default function Home() {
             <Button className="w-1/2">Continue</Button>
           </div>
         </LeftSection>
-        <Image src={"/case2.png"} width={400} height={760} draggable={false} alt="img" />
+        <Image src={"/case.png"} width={400} height={760} draggable={false} alt="img" />
         <RightSection className="flex flex-col gap-5 w-1/4">
           {PC_COMPONENTS.map((component) => (
             <div className="border-b-2 border-secondary/10">

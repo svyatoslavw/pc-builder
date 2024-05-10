@@ -1,5 +1,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useEffect } from "react"
+import { useCallback, useEffect, useMemo } from "react"
+
+import { getPrevFromLS } from "../utils"
 
 import { useActions } from "./useActions"
 import { useTypedSelector } from "./useTypedSelector"
@@ -13,31 +15,37 @@ export const useFilter = () => {
 
   const { queryParams, isFilterUpdated } = useTypedSelector((state) => state.filters)
 
+  const updateParams = useCallback(
+    (key: keyof TypeProductDataFilters, value: string) => {
+      const newParams = new URLSearchParams(searchParams?.toString())
+
+      if (value) {
+        newParams.set(key, String(value))
+      } else {
+        newParams.delete(key)
+      }
+
+      replace(pathname + (newParams.toString() ? `?${newParams.toString()}` : ""))
+      updateQueryParam({ key, value })
+    },
+    [pathname, searchParams, replace, updateQueryParam]
+  )
+
+  useEffect(() => {
+    const prevState = getPrevFromLS()
+
+    if (prevState) {
+      updateParams("component", prevState)
+    }
+  }, [updateParams])
+
   useEffect(() => {
     searchParams?.forEach((value, key) => {
-      updateQueryParam({
-        key: key as keyof TypeProductDataFilters,
-        value
-      })
+      updateParams(key as keyof TypeProductDataFilters, value)
     })
-  }, [])
+  }, [updateParams, searchParams])
 
-  const updateQueryParams = (key: keyof TypeProductDataFilters, value: string) => {
-    const newParams = new URLSearchParams(searchParams?.toString())
+  const values = useMemo(() => queryParams, [queryParams])
 
-    if (value) {
-      newParams.set(key, String(value))
-    } else {
-      newParams.delete(key)
-    }
-
-    replace(pathname + (newParams.toString() ? `?${newParams.toString()}` : ""))
-    updateQueryParam({ key, value })
-  }
-
-  return {
-    updateQueryParams,
-    queryParams,
-    isFilterUpdated
-  }
+  return { updateQueryParams: updateParams, queryParams: values, isFilterUpdated }
 }
