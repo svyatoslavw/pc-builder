@@ -1,5 +1,5 @@
-import { SystemsPage } from "./MySystemsPage"
+import { MySystemsPage } from "@/pages/my-systems"
 
 export default async function MySystems() {
-  return <SystemsPage />
+  return <MySystemsPage />
 }

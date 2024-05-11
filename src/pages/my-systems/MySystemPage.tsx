@@ -11,7 +11,7 @@ interface ISystemPage {
   user: IUser
 }
 
-const SystemPage = ({ products, user }: ISystemPage) => {
+const MySystemPage = ({ products, user }: ISystemPage) => {
   return (
     <main className="w-full">
       <div className="flex w-full">
@@ -34,4 +34,4 @@ const SystemPage = ({ products, user }: ISystemPage) => {
   )
 }
 
-export { SystemPage }
+export { MySystemPage }

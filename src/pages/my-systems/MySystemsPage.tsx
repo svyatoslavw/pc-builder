@@ -4,7 +4,7 @@ import { Card } from "@/shared/ui/card"
 import { BuildList } from "@/widgets/BuildList"
 import { DashboardHeader } from "@/widgets/DashboardHeader"
 
-const SystemsPage = () => {
+const MySystemsPage = () => {
   return (
     <main className="w-full">
       <DashboardHeader>
@@ -18,4 +18,4 @@ const SystemsPage = () => {
   )
 }
 
-export { SystemsPage }
+export { MySystemsPage }
