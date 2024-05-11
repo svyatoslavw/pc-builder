@@ -7,9 +7,11 @@ import {
   CircleChevronRight,
   LucideIcon,
   MoreVertical,
+  SaveIcon,
   Tv2Icon,
   UsersIcon
 } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import React, { createContext, useContext, useState } from "react"
@@ -19,6 +21,14 @@ import { Card, CardContent, CardTitle } from "../../shared/ui/card"
 
 import { IUser } from "@/shared/lib/types"
 import { cn } from "@/shared/lib/utils"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/shared/ui/dropdown-menu"
 
 interface ISidebarItem {
   Icon: LucideIcon
@@ -36,21 +46,47 @@ const SidebarContext = createContext<ISidebarContext>({ expanded: false })
 
 const UserInfo = ({ expanded, user }: { expanded: boolean; user: IUser }) => {
   return (
-    <div className="flex">
-      <img src="https://ui-avatars.com/api/?background=2563eb&color=ffffff&bold=true&name=S+S" alt="" className="w-10 h-10 rounded-md" />
-      <div
-        className={cn("flex justify-between items-center overflow-hidden transition-all", {
-          ["w-44 ml-3"]: expanded,
-          ["w-0"]: !expanded
-        })}
-      >
-        <div className="leading-4">
-          <h4 className="font-semibold">Sviatoslav</h4>
-          <span className="text-xs text-gray-600">{user.email}</span>
+    <>
+      {user.id ? (
+        <div className="flex">
+          <Image
+            src="https://ui-avatars.com/api/?background=2563eb&color=ffffff&bold=true&name=S+S"
+            alt="profile"
+            className="rounded-md"
+            width={40}
+            height={40}
+          />
+          <div
+            className={cn("flex justify-between items-center overflow-hidden transition-all", {
+              ["w-44 ml-3"]: expanded,
+              ["w-0"]: !expanded
+            })}
+          >
+            <div className="leading-4">
+              <h4 className="font-semibold">Sviatoslav</h4>
+              <span className="text-xs text-gray-600">{user.email}</span>
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <MoreVertical size={20} />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem>Copy payment ID</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>View customer</DropdownMenuItem>
+                <DropdownMenuItem>View payment details</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
-        <MoreVertical size={20} />
-      </div>
-    </div>
+      ) : (
+        <SidebarItem Icon={UsersIcon} text="Login" href={"/auth"} active={false} />
+      )}
+    </>
   )
 }
 
@@ -60,7 +96,7 @@ const SidebarItem = ({ Icon, text, active, alert, href }: ISidebarItem) => {
   return (
     <Link
       href={href}
-      className={cn("relative flex items-center py-1.5 px-2 my-2 font-medium rounded-md cursor-pointer transition-colors group", {
+      className={cn("relative flex items-center py-1.5 px-2 my-2 font-medium rounded-md cursor-pointer transition-all group", {
         ["bg-gray-100"]: active,
         ["hover:bg-gray-100"]: !active
       })}
@@ -124,8 +160,14 @@ const Sidebar = ({ user }: { user: IUser }) => {
       {
         text: "My Systems",
         Icon: Tv2Icon,
-        href: "/i/systems",
-        active: pathname?.includes("systems")
+        href: "/i/my-systems",
+        active: pathname?.includes("my-systems")
+      },
+      {
+        text: "Saved Systems",
+        Icon: SaveIcon,
+        href: "/i/saved-systems",
+        active: pathname?.includes("saved-systems")
       }
     ],
     [pathname]

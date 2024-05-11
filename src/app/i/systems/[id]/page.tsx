@@ -1,10 +1,31 @@
+import { notFound } from "next/navigation"
+
 import { BuildService } from "@/entities/build/api/build.service"
-import { UserService } from "@/entities/user/api/user.service"
-import { SystemPage } from "@/pages/system"
+import { SavedBuildItem } from "@/widgets/SavedBuildItem"
 
-export default async function System({ searchParams }: { searchParams: { [key: string]: string | string[] } }) {
-  const products = await BuildService.getAll(searchParams)
-  const user = await UserService.getProfile()
+type TypeParamProductSlug = {
+  id: string
+}
 
-  return <SystemPage products={products} user={user} />
+interface IPageProductSlug {
+  params: TypeParamProductSlug
+}
+
+export const dynamic = "force-dynamic"
+
+export async function generateStaticParams() {
+  const data = await BuildService.getAllSystems()
+  const paths = data.map((system) => {
+    return {
+      params: { id: system.id }
+    }
+  })
+
+  return paths
+}
+
+export default async function Systems({ params }: IPageProductSlug) {
+  const system = await BuildService.getSystemById(params.id)
+  if (!system?.is_public) return notFound()
+  return <SavedBuildItem build={system} />
 }

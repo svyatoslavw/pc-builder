@@ -1,15 +1,14 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
-import { EnumCategory } from "./types"
-import { IComponent } from "@/entities/product/model/build.types"
+import { EnumCategory, IComponent } from "./types"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
 export function getBuildId(pathname: string) {
-  return pathname.replace(/^\/i\/systems\//, "")
+  return pathname.replace(/^\/i\/my-systems\//, "")
 }
 
 export function getPrice({ processor, motherboard, memory, case: pcCase, graphics_card }: IComponent) {

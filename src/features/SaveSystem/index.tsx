@@ -4,10 +4,9 @@ import { SaveIcon } from "lucide-react"
 import { usePathname } from "next/navigation"
 import toast from "react-hot-toast"
 
-import { IBuild } from "@/entities/product/model/build.types"
 import { createClient } from "@/shared/api/client"
 import { useTypedSelector } from "@/shared/lib/hooks"
-import { IUser } from "@/shared/lib/types"
+import type { IBuild, IUser } from "@/shared/lib/types"
 import { getBuildId } from "@/shared/lib/utils"
 import { Button } from "@/shared/ui/button"
 
@@ -23,8 +22,6 @@ const SaveSystem = ({ user }: { user: IUser }) => {
   if (!system) return
 
   const isNotComplete = Object.values(system.components).some((component) => component === null)
-
-  console.log("@isNotComplete", isNotComplete)
 
   const createSystemHandler = async (system: IBuild, userId: string) => {
     const supabase = createClient()

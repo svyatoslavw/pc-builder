@@ -1,8 +1,7 @@
 "use client"
 
 import { CheckIcon, PlusIcon } from "lucide-react"
-import { usePathname } from "next/navigation"
-import React from "react"
+import { notFound, usePathname } from "next/navigation"
 import toast from "react-hot-toast"
 
 import { useActions, useTypedSelector } from "@/shared/lib/hooks"
@@ -11,20 +10,22 @@ import { IProduct } from "@/shared/lib/types"
 import { getBuildId } from "@/shared/lib/utils"
 import { Button } from "@/shared/ui/button"
 
-const AddToConstructor = React.memo(({ product }: { product: IProduct }) => {
-  const pathname = usePathname()
-  if (!pathname) return null
-
+const AddToConstructor = ({ product }: { product: IProduct }) => {
   const { addComponentToBuild } = useActions()
   const { queryParams } = useFilter()
   const builds = useTypedSelector((state) => state.builds)
 
+  const pathname = usePathname()
+  if (!pathname) return null
+
   const id = getBuildId(pathname)
+
   const state = builds.find((item) => item.id === id)
+  if (!state) return notFound()
 
-  const isSelectedProduct = React.useMemo(() => state && state.components[queryParams.component]?.id === product.id, [product, state])
+  const isSelectedProduct = state.components[queryParams.component]?.id === product.id
 
-  const AddToConstructorHandler = React.useCallback(() => {
+  const AddToConstructorHandler = () => {
     if (!isSelectedProduct) {
       addComponentToBuild({ id, component: product, category: queryParams.component })
       toast.success("Component added!")
@@ -32,7 +33,8 @@ const AddToConstructor = React.memo(({ product }: { product: IProduct }) => {
       addComponentToBuild({ id, component: null, category: queryParams.component })
       toast.error("Component removed!")
     }
-  }, [id, isSelectedProduct])
+  }
+
   return (
     <Button
       onClick={AddToConstructorHandler}
@@ -42,6 +44,6 @@ const AddToConstructor = React.memo(({ product }: { product: IProduct }) => {
       {isSelectedProduct ? <CheckIcon color="white" size={16} /> : <PlusIcon color="gray" size={16} />}
     </Button>
   )
-})
+}
 
 export { AddToConstructor }

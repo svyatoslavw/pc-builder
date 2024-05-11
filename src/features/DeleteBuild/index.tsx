@@ -2,6 +2,7 @@
 
 import { FileMinus2Icon } from "lucide-react"
 import React from "react"
+import toast from "react-hot-toast"
 
 import { useActions, useTypedSelector } from "@/shared/lib/hooks"
 import { Button } from "@/shared/ui/button"
@@ -13,7 +14,10 @@ const DeleteBuild = () => {
   const [item, setItem] = React.useState("")
   const builds = useTypedSelector((state) => state.builds)
 
-  console.log("@item", item)
+  const deleteBuildHandler = (item: string) => {
+    deleteBuild(item)
+    toast.success("System deleted!")
+  }
 
   return (
     <Dialog>
@@ -45,7 +49,7 @@ const DeleteBuild = () => {
           </Select>
         </div>
         <DialogClose disabled={!item}>
-          <Button disabled={!item} type="submit" onClick={() => deleteBuild(item)}>
+          <Button disabled={!item} type="submit" onClick={() => deleteBuildHandler(item)}>
             Delete system
           </Button>
         </DialogClose>

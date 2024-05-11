@@ -1,5 +1,6 @@
+import { createClient } from "@/shared/api/client"
 import { createServerClient } from "@/shared/api/server"
-import { EnumCategory, type IBuild, type IProduct } from "@/shared/lib/types"
+import { EnumCategory, type IBuild, IComponent, type IProduct, type ISystem } from "@/shared/lib/types"
 
 export const BuildService = {
   async getAll(searchParams: { [key: string]: string | string[] }) {
@@ -13,6 +14,17 @@ export const BuildService = {
     }
 
     return (products as IProduct[]) || []
+  },
+  async getAllSystems() {
+    const supabase = createClient()
+
+    const { data: systems, error } = await supabase.from("systems").select("*").order("created_at", { ascending: false })
+
+    if (error) {
+      console.log(error.message)
+    }
+
+    return (systems as IBuild[]) || []
   },
   async createSystem(system: IBuild, userId: string) {
     const supabase = createServerClient()
@@ -34,5 +46,93 @@ export const BuildService = {
     }
 
     return { error }
+  },
+  async updateSystemVibibility(system: IBuild, userId: string) {
+    const supabase = createServerClient()
+
+    const { error } = await supabase
+      .from("systems")
+      .update({
+        is_public: true
+      })
+      .eq("id", system.id)
+      .eq("user_id", userId)
+
+    if (error) {
+      console.log(error.message)
+    }
+
+    return { error }
+  },
+  async getComponentById(table: string, id: string) {
+    const supabase = createServerClient()
+
+    const { data: component, error } = await supabase.from(table).select("*").eq("id", id).single()
+
+    if (error) {
+      console.log(error.message)
+      return null
+    }
+
+    return component
+  },
+  async getSystemsByUserId(userId: string) {
+    const supabase = createServerClient()
+
+    const { data: systems, error } = await supabase.from("systems").select("*").eq("user_id", userId)
+
+    if (error) {
+      console.log(error.message)
+      return []
+    }
+
+    const data: IBuild[] = await Promise.all(
+      systems.map(async (system: ISystem) => {
+        const components: IComponent = {
+          processor: await this.getComponentById("processor", system.processor_id),
+          motherboard: await this.getComponentById("motherboard", system.motherboard_id),
+          memory: await this.getComponentById("memory", system.memory_id),
+          graphics_card: await this.getComponentById("graphics_card", system.graphics_card_id),
+          case: await this.getComponentById("case", system.case_id)
+        }
+
+        return {
+          id: system.id,
+          name: system.name,
+          components,
+          total: system.total
+        }
+      })
+    )
+
+    return data
+  },
+  async getSystemById(id: string) {
+    const supabase = createServerClient()
+
+    const { data: system, error } = await supabase.from("systems").select("*").eq("id", id).single()
+
+    if (error) {
+      console.log(error.message)
+      return null
+    }
+
+    const components: IComponent = {
+      processor: await this.getComponentById("processor", system.processor_id),
+      motherboard: await this.getComponentById("motherboard", system.motherboard_id),
+      memory: await this.getComponentById("memory", system.memory_id),
+      graphics_card: await this.getComponentById("graphics_card", system.graphics_card_id),
+      case: await this.getComponentById("case", system.case_id)
+    }
+
+    const data: IBuild = {
+      id: system.id,
+      name: system.name,
+      components,
+      total: system.total,
+      is_public: system.is_public
+    }
+
+    return data
   }
 }

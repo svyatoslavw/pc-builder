@@ -19,7 +19,7 @@ const DashboardHeader = React.forwardRef<HTMLOListElement, React.HTMLAttributes<
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink href={`/i/${pathname.slice(3).split("/")[0]}`} className="capitalize">
-                {pathname.slice(3).split("/")[0]}
+                {pathname.slice(3).split("/")[0].replace("-", " ")}
               </BreadcrumbLink>
             </BreadcrumbItem>
           </>

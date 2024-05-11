@@ -88,6 +88,18 @@ export interface IBuild {
   name: string
   components: IComponent
   total: number
+  is_public?: boolean
+}
+
+export interface ISystem {
+  id: string
+  name: string
+  processor_id: string
+  motherboard_id: string
+  memory_id: string
+  graphics_card_id: string
+  case_id: string
+  total: number
 }
 
 export interface ICategory {

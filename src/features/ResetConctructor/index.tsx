@@ -9,10 +9,10 @@ import { getBuildId } from "@/shared/lib/utils"
 import { Button } from "@/shared/ui/button"
 
 const ResetConctructor = () => {
-  const pathname = usePathname()
-  if (!pathname) return null
-
   const { resetConstructor } = useActions()
+
+  const pathname = usePathname() || ""
+
   const id = getBuildId(pathname)
 
   const resetConctructorHandler = () => {

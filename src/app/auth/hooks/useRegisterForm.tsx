@@ -35,7 +35,6 @@ export const useRegisterForm = () => {
   const onSubmit = registerForm.handleSubmit(async (data: z.infer<typeof RegisterSchema>) => {
     const res = await login(data)
     const { error } = JSON.parse(res)
-    console.log("@error", error)
 
     if (!error) {
       toast.success("Account created successfully!")

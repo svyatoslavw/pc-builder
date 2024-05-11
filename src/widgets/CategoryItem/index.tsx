@@ -10,17 +10,17 @@ import type { ICategory } from "@/shared/lib/types"
 import { cn, getBuildId } from "@/shared/lib/utils"
 import { Button } from "@/shared/ui/button"
 
-const CategoryItem = React.memo(({ category }: { category: ICategory }) => {
-  const pathname = usePathname()
-  if (!pathname) return null
-
+const CategoryItem = ({ category }: { category: ICategory }) => {
   const { updateQueryParams } = useFilter()
+
   const builds = useTypedSelector((state) => state.builds)
+
+  const pathname = usePathname() || ""
 
   const id = getBuildId(pathname)
   const build = builds.find((item) => item.id === id)
 
-  const isSelected = React.useMemo(() => build && build.components[category.table], [build])
+  const isSelected = React.useMemo(() => build && build.components[category.table], [build, category.table])
 
   const selectCategoryHandler = () => {
     updateQueryParams("component", category.table)
@@ -48,6 +48,6 @@ const CategoryItem = React.memo(({ category }: { category: ICategory }) => {
       )}
     </Button>
   )
-})
+}
 
 export { CategoryItem }

@@ -3,9 +3,9 @@
 import { CheckIcon } from "lucide-react"
 import React from "react"
 
-import type { IBuild } from "@/entities/product/model/build.types"
 import { useActions } from "@/shared/lib/hooks"
 import { useOutside } from "@/shared/lib/hooks/useOutside"
+import type { IBuild } from "@/shared/lib/types"
 import { Button } from "@/shared/ui/button"
 import { CardHeader } from "@/shared/ui/card"
 import { Input } from "@/shared/ui/input"
@@ -20,7 +20,7 @@ const RenameBuild = ({ build }: { build: IBuild }) => {
     setIsActive(false)
   }
   return (
-    <CardHeader ref={ref} className="flex py-3 w-full font-semibold text-neutral-500">
+    <CardHeader ref={ref} className="flex border-b py-2 w-full font-semibold text-neutral-500">
       {!isActive ? (
         <div className="flex truncate h-9 items-center" onClick={() => setIsActive(true)}>
           {build.name}
