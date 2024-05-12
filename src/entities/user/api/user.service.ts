@@ -16,8 +16,6 @@ export const UserService = {
     if (data.user) {
       const { data: user, error } = await supabase.from("users").select("*").eq("id", data.user.id).single()
 
-      console.log("@error", error?.message)
-
       if (!error) return user as IUser
     }
     return initUser as IUser

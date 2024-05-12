@@ -42,6 +42,14 @@ const ProductCharacteristics = ({ product }: { product: IProduct }) => {
         {item("GHz", product.ghz)}
       </>
     )
+  } else if ("watt" in product) {
+    return <>{item("W", product.watt)}</>
+  } else if ("drive_size" in product) {
+    return <>{item("", product.drive_size)}</>
+  } else if ("ssd_size" in product) {
+    return <>{item("", product.ssd_size)}</>
+  } else if ("windows" in product) {
+    return <>{item("Windows", product.windows)}</>
   } else {
     return null
   }

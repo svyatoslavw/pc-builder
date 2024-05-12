@@ -175,7 +175,7 @@ const Sidebar = ({ user }: { user: IUser }) => {
 
   return (
     <aside className="h-screen">
-      <Card className="h-full flex flex-col border-t-0 rounded-none">
+      <Card className="h-full flex flex-col border-t-0 rounded-none shadow-none">
         <CardTitle className="p-4 mb-4 h-16 flex border-b justify-between text-xl font-bold transition w-full items-center">
           <span
             className={cn("text-2xl font-bold transition w-full", {

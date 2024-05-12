@@ -55,6 +55,36 @@ export interface IGraphicsCard {
   memory_type: string
 }
 
+export interface IHardDrive {
+  id: string
+  name: string
+  price: number
+  image_url: string
+  rating: number
+  in_stock: boolean
+  drive_size: string
+}
+
+export interface ISsd {
+  id: string
+  name: string
+  price: number
+  image_url: string
+  rating: number
+  in_stock: boolean
+  ssd_size: string
+}
+
+export interface IPowerSupply {
+  id: string
+  name: string
+  price: number
+  image_url: string
+  rating: number
+  in_stock: boolean
+  watt: string
+}
+
 export interface ICase {
   id: string
   name: string
@@ -65,14 +95,35 @@ export interface ICase {
   form_factor: string
 }
 
-export type IProduct = IProcessor | IMotherboard | IMemory | IGraphicsCard | ICase
+export interface IOs {
+  id: string
+  name: string
+  price: number
+  image_url: string
+  rating: number
+  in_stock: boolean
+  windows: string
+}
+
+export type IProduct = IProcessor | IMotherboard | IMemory | IGraphicsCard | IHardDrive | ISsd | IPowerSupply | ICase | IOs
 
 export const enum EnumCategory {
   PROCESSOR = "processor",
   MOTHERBOARD = "motherboard",
   MEMORY = "memory",
   GRAPHICSCARD = "graphics_card",
-  CASE = "case"
+  HARDDRIVE = "hard_drive",
+  SSD = "ssd",
+  POWERSUPPLY = "power_supply",
+  CASE = "case",
+  OS = "os"
+}
+
+export enum EnumOrderStatus {
+  PENDING = "PENDING",
+  CONFIRMED = "CONFIRMED",
+  SHIPPED = "SHIPPED",
+  DELIVERED = "DELIVERED"
 }
 
 export interface IComponent {
@@ -80,7 +131,11 @@ export interface IComponent {
   motherboard: IMotherboard | null
   memory: IMemory | null
   graphics_card: IGraphicsCard | null
+  hard_drive: IHardDrive | null
+  ssd: ISsd | null
+  power_supply: IPowerSupply | null
   case: ICase | null
+  os: IOs | null
 }
 
 export interface IBuild {
@@ -88,7 +143,7 @@ export interface IBuild {
   name: string
   components: IComponent
   total: number
-  is_public?: boolean
+  success?: boolean
 }
 
 export interface ISystem {
@@ -98,8 +153,13 @@ export interface ISystem {
   motherboard_id: string
   memory_id: string
   graphics_card_id: string
+  hard_drive_id: string
+  ssd_id: string
+  power_supply_id: string
   case_id: string
+  os_id: string
   total: number
+  success: boolean
 }
 
 export interface ICategory {
@@ -113,4 +173,11 @@ export interface IUser {
   created_at: string
   email: string
   role: string
+}
+
+export interface IOrder {
+  id: string
+  user_id: string
+  system_id: string
+  status: EnumOrderStatus
 }

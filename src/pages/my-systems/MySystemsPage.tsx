@@ -11,7 +11,7 @@ const MySystemsPage = () => {
         <CreateBuild />
         <DeleteBuild />
       </DashboardHeader>
-      <Card className="flex flex-col filter border-none rounded-none">
+      <Card className="flex flex-col filter border-none shadow-none rounded-none">
         <BuildList />
       </Card>
     </main>

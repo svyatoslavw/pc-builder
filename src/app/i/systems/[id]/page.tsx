@@ -26,6 +26,6 @@ export async function generateStaticParams() {
 
 export default async function Systems({ params }: IPageProductSlug) {
   const system = await BuildService.getSystemById(params.id)
-  if (!system?.is_public) return notFound()
+  if (!system) return notFound()
   return <SavedBuildItem build={system} />
 }

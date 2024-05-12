@@ -34,7 +34,11 @@ const SaveSystem = ({ user }: { user: IUser }) => {
       motherboard_id: system.components.motherboard?.id,
       memory_id: system.components.memory?.id,
       graphics_card_id: system.components.graphics_card?.id,
+      power_supply_id: system.components.power_supply?.id,
+      hard_drive_id: system.components.hard_drive?.id,
+      ssd_id: system.components.ssd?.id,
       case_id: system.components.case?.id,
+      os_id: system.components.os?.id,
       user_id: userId
     })
 

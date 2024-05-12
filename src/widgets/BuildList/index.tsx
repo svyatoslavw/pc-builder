@@ -9,8 +9,8 @@ import { Empty } from "@/shared/ui/empty"
 const BuildList = () => {
   const builds = useTypedSelector((state) => state.builds)
   return (
-    <Card className="filter border-none overflow-y-auto rounded-none w-full p-5">
-      <CardContent className="grid grid-cols-custom gap-5 overflow-y-auto">
+    <Card className="filter border-none shadow-none overflow-y-auto rounded-none w-full p-5">
+      <CardContent className="grid grid-cols-custom p-0 gap-5 overflow-y-auto">
         {builds ? builds.map((build) => <BuildItem key={build.id} build={build} />) : <Empty />}
       </CardContent>
     </Card>

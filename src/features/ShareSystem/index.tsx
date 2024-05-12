@@ -26,8 +26,6 @@ async function getProfile() {
   if (data.user) {
     const { data: user, error } = await supabase.from("users").select("*").eq("id", data.user.id).single()
 
-    console.log("@error", error?.message)
-
     if (!error) return user as IUser
   }
   return null
@@ -54,17 +52,19 @@ async function updateSystemVibibility(system: IBuild) {
 }
 
 const ShareSystem = ({ build }: { build: IBuild }) => {
-  const link = window.location.origin + "/i/system/" + build.id
+  const link = window.location.origin + "/i/systems/" + build.id
 
   const shareSystemhandler = async (build: IBuild) => {
-    const error = await updateSystemVibibility(build)
+    //const error = await updateSystemVibibility(build)
 
-    if (!error) {
-      window.navigator.clipboard.writeText(link)
-      toast.success("Link copied!")
-    } else {
-      console.log(error)
-    }
+    window.navigator.clipboard.writeText(link)
+    toast.success("Link copied!")
+    // if (!error) {
+    //   window.navigator.clipboard.writeText(link)
+    //   toast.success("Link copied!")
+    // } else {
+    //   console.log(error)
+    // }
   }
 
   return (

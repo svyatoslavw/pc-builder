@@ -37,7 +37,11 @@ export const BuildService = {
       motherboard_id: system.components.motherboard?.id,
       memory_id: system.components.memory?.id,
       graphics_card_id: system.components.graphics_card?.id,
+      hard_drive_id: system.components.hard_drive?.id,
+      power_supply_id: system.components.power_supply?.id,
       case_id: system.components.case?.id,
+      ssd_id: system.components.ssd?.id,
+      os_id: system.components.os?.id,
       user_id: userId
     })
 
@@ -93,14 +97,19 @@ export const BuildService = {
           motherboard: await this.getComponentById("motherboard", system.motherboard_id),
           memory: await this.getComponentById("memory", system.memory_id),
           graphics_card: await this.getComponentById("graphics_card", system.graphics_card_id),
-          case: await this.getComponentById("case", system.case_id)
+          power_supply: await this.getComponentById("power_supply", system.power_supply_id),
+          hard_drive: await this.getComponentById("hard_drive", system.hard_drive_id),
+          ssd: await this.getComponentById("ssd", system.ssd_id),
+          case: await this.getComponentById("case", system.case_id),
+          os: await this.getComponentById("os", system.os_id)
         }
 
         return {
           id: system.id,
           name: system.name,
           components,
-          total: system.total
+          total: system.total,
+          success: system.success
         }
       })
     )
@@ -122,6 +131,10 @@ export const BuildService = {
       motherboard: await this.getComponentById("motherboard", system.motherboard_id),
       memory: await this.getComponentById("memory", system.memory_id),
       graphics_card: await this.getComponentById("graphics_card", system.graphics_card_id),
+      hard_drive: await this.getComponentById("hard_drive", system.hard_drive_id),
+      ssd: await this.getComponentById("ssd", system.ssd_id),
+      power_supply: await this.getComponentById("power_supply", system.power_supply_id),
+      os: await this.getComponentById("os", system.os_id),
       case: await this.getComponentById("case", system.case_id)
     }
 
@@ -130,7 +143,7 @@ export const BuildService = {
       name: system.name,
       components,
       total: system.total,
-      is_public: system.is_public
+      success: system.success
     }
 
     return data

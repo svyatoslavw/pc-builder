@@ -2,7 +2,18 @@ import { type PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { v4 as uuidv4 } from "uuid"
 
 import { type IAddToConstructor, type IInitialState, IUpdateConstructor } from "./build.types"
-import { EnumCategory, type ICase, type IGraphicsCard, type IMemory, type IMotherboard, type IProcessor } from "@/shared/lib/types"
+import {
+  EnumCategory,
+  type ICase,
+  type IGraphicsCard,
+  IHardDrive,
+  type IMemory,
+  type IMotherboard,
+  IOs,
+  IPowerSupply,
+  type IProcessor,
+  ISsd
+} from "@/shared/lib/types"
 import { getPrice } from "@/shared/lib/utils"
 
 const initialState: IInitialState = []
@@ -20,7 +31,11 @@ export const buildSlice = createSlice({
           motherboard: null,
           graphics_card: null,
           memory: null,
-          case: null
+          hard_drive: null,
+          ssd: null,
+          power_supply: null,
+          case: null,
+          os: null
         },
         total: 0
       })
@@ -59,9 +74,22 @@ export const buildSlice = createSlice({
           case EnumCategory.GRAPHICSCARD:
             build.components.graphics_card = build.components.graphics_card === component ? null : (component as IGraphicsCard)
             break
+          case EnumCategory.POWERSUPPLY:
+            build.components.power_supply = build.components.power_supply === component ? null : (component as IPowerSupply)
+            break
+          case EnumCategory.HARDDRIVE:
+            build.components.hard_drive = build.components.hard_drive === component ? null : (component as IHardDrive)
+            break
+          case EnumCategory.SSD:
+            build.components.ssd = build.components.ssd === component ? null : (component as ISsd)
+            break
+          case EnumCategory.OS:
+            build.components.os = build.components.os === component ? null : (component as IOs)
+            break
           case EnumCategory.CASE:
             build.components.case = build.components.case === component ? null : (component as ICase)
             break
+
           default:
             break
         }
@@ -78,7 +106,12 @@ export const buildSlice = createSlice({
         build.components.motherboard = null
         build.components.memory = null
         build.components.graphics_card = null
+        build.components.power_supply = null
+        build.components.hard_drive = null
+        build.components.processor = null
         build.components.case = null
+        build.components.ssd = null
+        build.components.os = null
         build.total = 0
       }
     }
