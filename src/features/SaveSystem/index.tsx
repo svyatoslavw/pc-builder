@@ -48,6 +48,7 @@ const SaveSystem = ({ user }: { user: IUser }) => {
       toast.error(error?.message)
     } else {
       toast.success("System created!")
+      //revalidate()
     }
   }
   return (

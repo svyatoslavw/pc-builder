@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import * as z from "zod"
 
 import { LoginSchema } from "@/app/auth/hooks/useLoginForm"
@@ -50,6 +50,10 @@ export async function logout() {
   }
 
   revalidatePath("/auth")
-  revalidatePath("/orders")
+  revalidatePath("/saved-systems")
   revalidatePath("/", "layout")
+}
+
+export async function revalidate() {
+  revalidateTag("saved-systems")
 }

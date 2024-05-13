@@ -23,3 +23,19 @@ export function getPrevFromLS() {
 export function setPrevToLS(state: EnumCategory) {
   localStorage.setItem("filter_prev_state", JSON.stringify(state))
 }
+
+export function debounce(func: Function, wait: number) {
+  let timeout: NodeJS.Timeout | null
+
+  return function (this: any, ...args: any[]) {
+    const context = this
+
+    const later = () => {
+      timeout = null
+      func.apply(context, args)
+    }
+
+    clearTimeout(timeout!)
+    timeout = setTimeout(later, wait)
+  }
+}

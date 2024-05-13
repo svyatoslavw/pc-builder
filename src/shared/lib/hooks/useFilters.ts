@@ -5,7 +5,7 @@ import { getPrevFromLS } from "../utils"
 
 import { useActions } from "./useActions"
 import { useTypedSelector } from "./useTypedSelector"
-import { TypeProductDataFilters } from "@/entities/build/model/filter.types"
+import { TypeProductDataFilters } from "@/entities/filter/model/filter.types"
 
 export const useFilter = () => {
   const pathname = usePathname()

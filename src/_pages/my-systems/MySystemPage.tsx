@@ -1,3 +1,6 @@
+import { Filter } from "@/entities/filter/ui/Filter"
+import { PriceFilter } from "@/features/Filter/PriceFilter"
+import { SortByFilter } from "@/features/Filter/SortByFilter"
 import { ResetConctructor } from "@/features/ResetConctructor"
 import { SaveSystem } from "@/features/SaveSystem"
 import { IProduct, IUser } from "@/shared/lib/types"
@@ -28,7 +31,13 @@ const MySystemPage = ({ products, user }: ISystemPage) => {
             <ResetConctructor />
           </CardFooter>
         </CardContent>
-        <ProductList products={products} />
+        <Card className="filter border-none rounded-none overflow-y-auto px-6 w-full test">
+          <Filter>
+            <SortByFilter />
+            <PriceFilter />
+          </Filter>
+          <ProductList products={products} />
+        </Card>
       </Card>
     </main>
   )

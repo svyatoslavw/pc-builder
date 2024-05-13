@@ -1,4 +1,4 @@
-import { DashboardPage } from "@/pages/dashboard/DashboardPage"
+import { DashboardPage } from "@/_pages/dashboard/DashboardPage"
 import { DashboardHeader } from "@/widgets/DashboardHeader"
 
 export default async function Dashboard() {

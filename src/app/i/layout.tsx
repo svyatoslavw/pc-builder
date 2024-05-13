@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Toaster } from "react-hot-toast"
 
 import { UserService } from "@/entities/user/api/user.service"
 import { Sidebar } from "@/widgets/Sidebar"
@@ -20,7 +19,6 @@ export default async function DashboardLayout({
     <main className="flex">
       <Sidebar user={user} />
       {children}
-      <Toaster toastOptions={{ iconTheme: { primary: "blue", secondary: "white" } }} />
     </main>
   )
 }

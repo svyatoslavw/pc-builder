@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
-import { IFilterState, iFilterActiontsPayload } from "./filter.types"
+import { EnumSortBy, IFilterState, iFilterActiontsPayload } from "./filter.types"
 import { EnumCategory } from "@/shared/lib/types"
 import { setPrevToLS } from "@/shared/lib/utils"
 
@@ -8,7 +8,10 @@ const initialState: IFilterState = {
   isFilterUpdated: false,
   queryParams: {
     component: EnumCategory.PROCESSOR,
-    searchTerm: ""
+    searchTerm: "",
+    sortBy: EnumSortBy.NEWEST,
+    minPrice: "0",
+    maxPrice: ""
   }
 }
 
@@ -21,6 +24,8 @@ export const filtersSlice = createSlice({
       if (key === "component") {
         state.queryParams[key] = value as EnumCategory
         setPrevToLS(state.queryParams[key])
+      } else if (key === "sortBy") {
+        state.queryParams[key] = value as EnumSortBy
       } else {
         state.queryParams[key] = value
       }

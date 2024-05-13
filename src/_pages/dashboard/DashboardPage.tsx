@@ -59,8 +59,7 @@ async function GetTestArray() {
   return (products as IProcessor[]) || []
 }
 
-const DashboardPage = async () => {
-  const data = await GetTestArray()
+const DashboardPage = () => {
   return (
     <div className="mt-3 h-[120px] w-1/3">
       <ResponsiveContainer width="100%" height="100%">

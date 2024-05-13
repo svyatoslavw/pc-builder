@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { persistStore } from "redux-persist"
 
 import { buildSlice } from "@/entities/build/model/build.slice"
-import { filtersSlice } from "@/entities/build/model/filter.slice"
+import { filtersSlice } from "@/entities/filter/model/filter.slice"
 
 const isClient = typeof window !== "undefined"
 

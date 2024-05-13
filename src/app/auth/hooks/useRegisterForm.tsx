@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { z } from "zod"
 
-import { login } from "@/app/auth/actions"
+import { register } from "@/app/auth/actions"
 
 export const RegisterSchema = z
   .object({
@@ -33,12 +33,13 @@ export const useRegisterForm = () => {
   })
 
   const onSubmit = registerForm.handleSubmit(async (data: z.infer<typeof RegisterSchema>) => {
-    const res = await login(data)
+    const res = await register(data)
     const { error } = JSON.parse(res)
 
-    if (!error) {
+    console.log("@error", error)
+
+    if (!error?.__isAuthError) {
       toast.success("Account created successfully!")
-      replace("/")
     } else {
       toast.error("Something went wrong!")
     }

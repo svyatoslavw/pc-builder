@@ -1,13 +1,28 @@
+import { EnumSortBy } from "../../filter/model/filter.types"
+
 import { createClient } from "@/shared/api/client"
 import { createServerClient } from "@/shared/api/server"
 import { EnumCategory, type IBuild, IComponent, type IProduct, type ISystem } from "@/shared/lib/types"
 
 export const BuildService = {
   async getAll(searchParams: { [key: string]: string | string[] }) {
-    const component = searchParams["component"] ?? EnumCategory.PROCESSOR
+    const { component = EnumCategory.PROCESSOR, sortBy = EnumSortBy.NEWEST, minPrice = "", maxPrice = "" } = searchParams
+
     const supabase = createServerClient()
 
-    const { data: products, error } = await supabase.from(`${component}`).select("*").order("created_at", { ascending: false })
+    const orderColumn = sortBy === EnumSortBy.NEWEST ? "created_at" : sortBy === EnumSortBy.OLDEST ? "created_at" : "price"
+    const orderAscending = sortBy === EnumSortBy.NEWEST || sortBy === EnumSortBy.LOW
+
+    let query = supabase.from(`${component}`).select("*").order(orderColumn, { ascending: orderAscending })
+
+    if (minPrice) {
+      query = query.gt("price", minPrice)
+    }
+    if (maxPrice) {
+      query = query.lt("price", maxPrice)
+    }
+
+    const { data: products, error } = await query
 
     if (error) {
       console.log(error.message)
@@ -15,6 +30,7 @@ export const BuildService = {
 
     return (products as IProduct[]) || []
   },
+
   async getAllSystems() {
     const supabase = createClient()
 

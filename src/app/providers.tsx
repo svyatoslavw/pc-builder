@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { Toaster } from "react-hot-toast"
 import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 
@@ -12,6 +13,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       <PersistGate persistor={persistor} loading={null}>
         {children}
       </PersistGate>
+      <Toaster toastOptions={{ iconTheme: { primary: "black", secondary: "white" } }} />
     </Provider>
   )
 }

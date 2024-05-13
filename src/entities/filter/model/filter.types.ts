@@ -1,12 +1,20 @@
 import { EnumCategory } from "@/shared/lib/types"
 
+export enum EnumSortBy {
+  NEWEST = "newest",
+  OLDEST = "oldest",
+  LOW = "lowPrice",
+  HIGH = "highPrice"
+}
+
 export type TypeProductDataFilters = {
   component: EnumCategory
   searchTerm?: string
   // page?: string | number
   // perPage: string | number
-  // minPrice?: string
-  // maxPrice?: string
+  sortBy?: EnumSortBy
+  minPrice?: string
+  maxPrice?: string
   // categoryId?: string
   // genderId?: string
 }

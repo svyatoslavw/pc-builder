@@ -5,6 +5,7 @@ import {
   BellIcon,
   CircleChevronLeft,
   CircleChevronRight,
+  LogOutIcon,
   LucideIcon,
   MoreVertical,
   SaveIcon,
@@ -19,6 +20,7 @@ import React, { createContext, useContext, useState } from "react"
 import { Button } from "../../shared/ui/button"
 import { Card, CardContent, CardTitle } from "../../shared/ui/card"
 
+import { logout } from "@/app/auth/actions"
 import { IUser } from "@/shared/lib/types"
 import { cn } from "@/shared/lib/utils"
 import {
@@ -50,7 +52,7 @@ const UserInfo = ({ expanded, user }: { expanded: boolean; user: IUser }) => {
       {user.id ? (
         <div className="flex">
           <Image
-            src="https://ui-avatars.com/api/?background=2563eb&color=ffffff&bold=true&name=S+S"
+            src="https://ui-avatars.com/api/?background=171717&color=ffffff&bold=true&name=P+B"
             alt="profile"
             className="rounded-md"
             width={40}
@@ -63,7 +65,7 @@ const UserInfo = ({ expanded, user }: { expanded: boolean; user: IUser }) => {
             })}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">Sviatoslav</h4>
+              <h4 className="font-semibold">Welcome!</h4>
               <span className="text-xs text-gray-600">{user.email}</span>
             </div>
             <DropdownMenu>
@@ -78,7 +80,10 @@ const UserInfo = ({ expanded, user }: { expanded: boolean; user: IUser }) => {
                 <DropdownMenuItem>Copy payment ID</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>View customer</DropdownMenuItem>
-                <DropdownMenuItem>View payment details</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => logout()}>
+                  <LogOutIcon size={16} className="mr-2" /> Logout
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -103,7 +108,7 @@ const SidebarItem = ({ Icon, text, active, alert, href }: ISidebarItem) => {
     >
       <Icon
         className={cn("text-gray-500", {
-          ["text-blue-600"]: active
+          ["text-black"]: active
         })}
       />
       <span
@@ -196,7 +201,7 @@ const Sidebar = ({ user }: { user: IUser }) => {
             ))}
           </CardContent>
 
-          <div className="border-t flex flex-col gap-4 p-3">
+          <div className="border-t flex flex-col p-3">
             <SidebarItem Icon={BellIcon} text="Notifications" href={"/i/notifications"} active={pathname?.includes("notifications")} />
             <UserInfo user={user} expanded={expanded} />
           </div>

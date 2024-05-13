@@ -11,11 +11,7 @@ const LINKS = [
   },
   {
     name: "My systems",
-    href: "/i/systems"
-  },
-  {
-    name: "Settings",
-    href: "/settings"
+    href: "/i/my-systems"
   }
 ]
 
@@ -52,13 +48,13 @@ export default function Home() {
         </h1>
         <div className="flex gap-4">
           {LINKS.map((link) => (
-            <Link className="hover:text-blue-600 transition font-medium" key={link.name} href={link.href}>
+            <Link className="hover:text-blue-600 text-sm transition font-medium" key={link.name} href={link.href}>
               {link.name}
             </Link>
           ))}
         </div>
       </header>
-      <SectionContainer className="pr-0 bg-blue-200">
+      <SectionContainer className="pr-0 bg-neutral-100">
         <div className="w-1/2">
           <h1 className="underline text-7xl font-bold mb-6">Get Your Perfect PC Today!</h1>
           <div className="text-neutral-600">
@@ -77,7 +73,14 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <Image src={"/fon.jpg"} className="rounded-s-3xl" width={950} draggable={false} height={500} alt="img" />
+          <Image
+            src={"/bg.png"}
+            className="rounded-s-3xl border-2 border-r-0 border-primary p-1 pr-0"
+            width={950}
+            draggable={false}
+            height={500}
+            alt="img"
+          />
         </div>
       </SectionContainer>
       <SectionContainer className="justify-center flex-col"></SectionContainer>

@@ -11,11 +11,6 @@ const PC_COMPONENTS = [
   { id: "45643dasdfre", name: "SSD", table: EnumCategory.SSD },
   { id: "4t4tfewrf43", name: "Case", table: EnumCategory.CASE },
   { id: "45643dasdfre", name: "Operating System", table: EnumCategory.OS }
-  // { key: "Case/Housing", value: "Case/Housing" },
-  // { key: "Power Supply", value: "Power Supply" },
-  // { key: "Operating System", value: "Operating System" },
-  // { key: "Software", value: "Software" },
-  // { key: "Assembly", value: "Assembly" }
 ]
 
 const CategoryList = () => {

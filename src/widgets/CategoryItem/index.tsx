@@ -31,9 +31,9 @@ const CategoryItem = ({ category }: { category: ICategory }) => {
       onClick={selectCategoryHandler}
       variant={"ghost"}
       className={cn(
-        "px-2 py-1 cursor-default flex items-center justify-start gap-1.5 text-sm font-medium text-gray-500 rounded-lg transition hover:bg-gray-100",
+        "px-2 py-1 cursor-default flex items-center justify-start gap-1.5 text-sm font-medium text-gray-500 rounded-lg transition hover:bg-neutral-200",
         {
-          ["bg-blue-100 text-blue-600 hover:text-blue-600 hover:bg-blue-200"]: isSelected
+          ["bg-neutral-100 text-black"]: isSelected
         }
       )}
     >

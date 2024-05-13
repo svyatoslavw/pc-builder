@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { logout } from "@/app/auth/actions"
 
 export async function updateSession(request: NextRequest) {
-  const PROTECTED_PATHS = ["/settings", "/orders", "/favorite"]
+  const PROTECTED_PATHS = ["/i/saved-systems"]
 
   let response = NextResponse.next({
     request: {

@@ -22,7 +22,7 @@ const RenameBuild = ({ build }: { build: IBuild }) => {
   return (
     <CardHeader ref={ref} className="flex border-b py-2 w-full font-semibold text-neutral-500">
       {!isActive ? (
-        <div className="flex truncate h-9 items-center" onClick={() => setIsActive(true)}>
+        <div className="flex truncate h-9 pt-[1px] items-center" onClick={() => setIsActive(true)}>
           {build.name}
         </div>
       ) : (
