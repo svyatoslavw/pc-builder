@@ -2,7 +2,6 @@
 
 import {
   BarChartHorizontalIcon,
-  BellIcon,
   CircleChevronLeft,
   CircleChevronRight,
   LogOutIcon,
@@ -151,18 +150,6 @@ const Sidebar = ({ user }: { user: IUser }) => {
   const SIDEBAR_LINKS: ISidebarItem[] = React.useMemo(
     () => [
       {
-        text: "Dashboard",
-        Icon: BarChartHorizontalIcon,
-        href: "/i/dashboard",
-        active: pathname?.includes("dashboard")
-      },
-      {
-        text: "Clients",
-        Icon: UsersIcon,
-        href: "/i/clients",
-        active: pathname?.includes("clients")
-      },
-      {
         text: "My Systems",
         Icon: Tv2Icon,
         href: "/i/my-systems",
@@ -202,7 +189,9 @@ const Sidebar = ({ user }: { user: IUser }) => {
           </CardContent>
 
           <div className="border-t flex flex-col p-3">
-            <SidebarItem Icon={BellIcon} text="Notifications" href={"/i/notifications"} active={pathname?.includes("notifications")} />
+            {user.role === "admin" && (
+              <SidebarItem Icon={BarChartHorizontalIcon} text="Dashboard" href={"/i/dashboard"} active={pathname?.includes("dashboard")} />
+            )}
             <UserInfo user={user} expanded={expanded} />
           </div>
         </SidebarContext.Provider>

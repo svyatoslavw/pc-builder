@@ -4,17 +4,6 @@ import Link from "next/link"
 import { Button } from "@/shared/ui/button"
 import { SectionContainer } from "@/shared/ui/container"
 
-const LINKS = [
-  {
-    name: "Dashboard",
-    href: "/i/dashboard"
-  },
-  {
-    name: "My systems",
-    href: "/i/my-systems"
-  }
-]
-
 const HERO_INFO = [
   {
     title: "Pre-Built",
@@ -26,19 +15,6 @@ const HERO_INFO = [
   }
 ]
 
-const CHARACTERICTICS = ["Premium Custom PC", "Ready for High-Performance", "Premium Full Steel Chassis", "Streamer Friendly"]
-
-const PC_COMPONENTS = [
-  { title: "Processor", type: "Intel 10th Gen or Ryzen 3000 Processors" },
-  { title: "Graphics Card", type: "Up to the NVIDIA GeForce RTX 3080" },
-  { title: "Memory", type: "32 GB Ultra-fast 3800mhz Memory" },
-  { title: "Cooling", type: "Premium Custom Water cooled CPU" },
-  { title: "Storage", type: "1TB NVMe SSD + 2TB HDD Combo" },
-  { title: "Motherboard", type: "High-end ATX Motherboard with PCIe 4.0 support" },
-  { title: "Case", type: "Sleek Tempered Glass Mid Tower Case with RGB lighting" },
-  { title: "Operating System", type: "Windows 10 Pro 64-bit" }
-]
-
 export default function Home() {
   return (
     <>
@@ -46,13 +22,9 @@ export default function Home() {
         <h1 className="text-lg font-bold">
           PC <span className="text-blue-500">Builder</span>
         </h1>
-        <div className="flex gap-4">
-          {LINKS.map((link) => (
-            <Link className="hover:text-blue-600 text-sm transition font-medium" key={link.name} href={link.href}>
-              {link.name}
-            </Link>
-          ))}
-        </div>
+        <Link className="hover:text-blue-600 text-sm transition font-medium" href="/i/my-systems">
+          GO TO BUILDER
+        </Link>
       </header>
       <SectionContainer className="pr-0 bg-neutral-100">
         <div className="w-1/2">

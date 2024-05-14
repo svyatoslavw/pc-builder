@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { logout } from "@/app/auth/actions"
 
 export async function updateSession(request: NextRequest) {
-  const PROTECTED_PATHS = ["/i/saved-systems"]
+  const PROTECTED_PATHS = ["/i/saved-systems", "/i/dashboard"]
 
   let response = NextResponse.next({
     request: {
@@ -65,7 +65,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   const url = new URL(request.url)
-  const isAdminPage = request.url.includes("/admin")
+  const isAdminPage = request.url.includes("dashboard")
 
   if (user) {
     if (url.pathname === "/auth") {

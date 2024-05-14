@@ -177,7 +177,9 @@ export interface IUser {
 
 export interface IOrder {
   id: string
+  created_at: string
   user_id: string
+  user_email: string
   system_id: string
   status: EnumOrderStatus
 }

@@ -54,6 +54,7 @@ async function onPaymentSucceeded(email: string, session: Stripe.Response<Stripe
 
   const { error: orderError } = await supabase.from("orders").insert({
     user_id: user.id,
+    user_email: email,
     system_id: systemId,
     status: EnumOrderStatus.CONFIRMED
   })
