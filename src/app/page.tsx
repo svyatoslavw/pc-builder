@@ -1,6 +1,8 @@
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
+import { CREATOR, GITHUB_URL, SITE_KEYWORDS, SITE_NAME, SITE_URL } from "@/shared/lib/config/seo.config"
 import { Button } from "@/shared/ui/button"
 import { SectionContainer } from "@/shared/ui/container"
 
@@ -15,9 +17,33 @@ const HERO_INFO = [
   }
 ]
 
+export const metadata: Metadata = {
+  icons: {
+    icon: "icon.png",
+    shortcut: "icon.png"
+  },
+  title: {
+    absolute: `Home - ${SITE_NAME}`,
+    template: `%s | ${SITE_NAME}`
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    emails: `example@${SITE_NAME}`
+  },
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  creator: CREATOR,
+  authors: {
+    name: CREATOR,
+    url: GITHUB_URL
+  },
+  keywords: SITE_KEYWORDS
+}
+
 export default function Home() {
   return (
-    <>
+    <main className="h-screen">
       <header className="h-16 px-6 flex items-center justify-between">
         <h1 className="text-lg font-bold">
           PC <span className="text-blue-500">Builder</span>
@@ -26,7 +52,7 @@ export default function Home() {
           GO TO BUILDER
         </Link>
       </header>
-      <SectionContainer className="pr-0 bg-neutral-100">
+      <SectionContainer className="pr-0">
         <div className="w-1/2">
           <h1 className="underline text-7xl font-bold mb-6">Get Your Perfect PC Today!</h1>
           <div className="text-neutral-600">
@@ -38,9 +64,11 @@ export default function Home() {
             ))}
           </div>
           <div className="flex gap-2 mt-10">
-            <Button size={"lg"}>Pre-Build</Button>
-            <Button size={"lg"} variant={"outline"}>
-              Build It Yourself
+            <Button size={"lg"}>
+              <Link href={"/i/my-systems"}>Build It Yourself</Link>
+            </Button>
+            <Button disabled size={"lg"} variant={"outline"}>
+              Pre-Build
             </Button>
           </div>
         </div>
@@ -56,69 +84,6 @@ export default function Home() {
         </div>
       </SectionContainer>
       <SectionContainer className="justify-center flex-col"></SectionContainer>
-    </>
-    // <>
-    //   <header className="bg-primary/5 h-12 px-6 flex items-center justify-between">
-    //     <h1 className="text-lg font-bold">
-    //       PC <span className="text-green-500">Builder</span>
-    //     </h1>
-    //     <div className="flex gap-4 text-sm">
-    //       {LINKS.map((link) => (
-    //         <Link className="hover:text-primary/70 transition font-medium" key={link.name} href={link.href}>
-    //           {link.name}
-    //         </Link>
-    //       ))}
-    //     </div>
-    //   </header>
-    //   <SectionContainer>
-    //     <LeftSection>
-    //       <h1 className="underline text-7xl font-bold mb-6">Get Your Perfect PC Today!</h1>
-    //       <p className="">Choose from Our Pre-build Selection or Build Your Own with Your PC!</p>
-    //       <div className="flex gap-2 mt-10">
-    //         <Button>Pre-Build</Button>
-    //         <Button variant={"outline"}>Build It Yourself</Button>
-    //       </div>
-    //     </LeftSection>
-    //     <Image src={"/3.jpg"} width={600} draggable={false} height={600} alt="img" />
-    //     <RightSection>
-    //       {HERO_INFO.map((hero) => (
-    //         <div>
-    //           <h1 className="mb-3 text-3xl text-green-600 font-semibold">{hero.title}</h1>
-    //           <p>{hero.type}</p>
-    //         </div>
-    //       ))}
-    //     </RightSection>
-    //   </SectionContainer>
-    //   <SectionContainer className="text-secondary bg-primary">
-    //     <LeftSection className="gap-24 h-full">
-    //       <div>
-    //         <h1 className="text-7xl w-full font-medium mb-16 underline">Brend new beast</h1>
-    //         <ul>
-    //           {CHARACTERICTICS.map((char) => (
-    //             <li key={char} className="mb-4 flex gap-2">
-    //               <BadgeCheckIcon color="#16a34a" /> {char}
-    //             </li>
-    //           ))}
-    //         </ul>
-    //       </div>
-    //       <div className="flex flex-col gap-6">
-    //         <p className="text-sm text-secondary/50">
-    //           from <br />
-    //           <span className="text-6xl text-secondary font-bold">$2550</span> in stock
-    //         </p>
-    //         <Button className="w-1/2">Continue</Button>
-    //       </div>
-    //     </LeftSection>
-    //     <Image src={"/case.png"} width={400} height={760} draggable={false} alt="img" />
-    //     <RightSection className="flex flex-col gap-5 w-1/4">
-    //       {PC_COMPONENTS.map((component) => (
-    //         <div className="border-b-2 border-secondary/10">
-    //           <h1 className="mb-3 text-xl font-semibold">{component.title}</h1>
-    //           <p className="text-secondary/50 text-sm">{component.type}</p>
-    //         </div>
-    //       ))}
-    //     </RightSection>
-    //   </SectionContainer>
-    //</>
+    </main>
   )
 }

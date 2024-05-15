@@ -3,11 +3,10 @@
 import Image from "next/image"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
-import { createClient } from "@/shared/api/client"
-import { EnumOrderStatus, IOrder } from "@/shared/lib/types"
+import UpdateOrderStatus from "@/features/UpdateOrderStatus"
+import { IOrder } from "@/shared/lib/types"
 import { formatDate } from "@/shared/lib/utils"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/ui/card"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/ui/table"
 
 const data = [
@@ -60,22 +59,6 @@ const data = [
     total: Math.floor(Math.random() * 5000) + 1000
   }
 ]
-
-async function updateOrderStatus(id: string, status: EnumOrderStatus) {
-  const supabase = createClient()
-  console.log("@@upd")
-
-  const { data, error } = await supabase
-    .from("orders")
-    .update({
-      status: status
-    })
-    .eq("id", id)
-
-  if (error) {
-    console.log(error.message)
-  }
-}
 
 const DashboardPage = ({ orders }: { orders: IOrder[] }) => {
   return (
@@ -147,20 +130,7 @@ const DashboardPage = ({ orders }: { orders: IOrder[] }) => {
                       <div className="hidden text-sm text-muted-foreground md:inline">{order.system_id}</div>
                     </TableCell>
                     <TableCell className="hidden sm:table-cell">
-                      <Select onValueChange={(value) => updateOrderStatus(order.id, value as EnumOrderStatus)}>
-                        <SelectTrigger className="w-[180px]">
-                          <SelectValue placeholder={order.status} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            {Object.values(EnumOrderStatus).map((status) => (
-                              <SelectItem key={status} value={status}>
-                                {status}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
+                      <UpdateOrderStatus order={order} key={order.id} />
                     </TableCell>
                     <TableCell className="hidden md:table-cell">{formatDate(order.created_at)}</TableCell>
                     <TableCell className="text-right">$100.00</TableCell>
