@@ -54,17 +54,9 @@ async function updateSystemVibibility(system: IBuild) {
 const ShareSystem = ({ build }: { build: IBuild }) => {
   const link = window.location.origin + "/i/systems/" + build.id
 
-  const shareSystemhandler = async (build: IBuild) => {
-    //const error = await updateSystemVibibility(build)
-
+  const shareSystemhandler = () => {
     window.navigator.clipboard.writeText(link)
     toast.success("Link copied!")
-    // if (!error) {
-    //   window.navigator.clipboard.writeText(link)
-    //   toast.success("Link copied!")
-    // } else {
-    //   console.log(error)
-    // }
   }
 
   return (
@@ -86,14 +78,13 @@ const ShareSystem = ({ build }: { build: IBuild }) => {
             </Label>
             <Input id="link" defaultValue={link} readOnly />
           </div>
-          <Button onClick={() => shareSystemhandler(build)} type="submit" size="sm" className="px-3">
-            <span className="sr-only">Copy</span>
+          <Button title="Copy" onClick={shareSystemhandler} type="submit" size="sm" className="px-3">
             <Copy className="h-4 w-4" />
           </Button>
         </div>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button title="Close" type="button" variant="secondary">
               Close
             </Button>
           </DialogClose>

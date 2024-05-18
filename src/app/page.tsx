@@ -43,13 +43,13 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="h-screen">
-      <header className="h-16 px-6 flex items-center justify-between">
+    <main className="h-screen flex w-full flex-col justify-center items-center">
+      <header className="h-16 w-full px-6 absolute left-0 top-0 flex items-center justify-between">
         <h1 className="text-lg font-bold">
           PC <span className="text-blue-500">Builder</span>
         </h1>
         <Link className="hover:text-blue-600 text-sm transition font-medium" href="/i/my-systems">
-          GO TO BUILDER
+          Go to my systems
         </Link>
       </header>
       <SectionContainer className="pr-0">
@@ -83,7 +83,6 @@ export default function Home() {
           />
         </div>
       </SectionContainer>
-      <SectionContainer className="justify-center flex-col"></SectionContainer>
     </main>
   )
 }
