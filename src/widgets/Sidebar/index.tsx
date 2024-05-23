@@ -4,6 +4,7 @@ import {
   BarChartHorizontalIcon,
   CircleChevronLeft,
   CircleChevronRight,
+  Grid2x2CheckIcon,
   LogOutIcon,
   LucideIcon,
   MoreVertical,
@@ -131,7 +132,7 @@ const SidebarItem = ({ Icon, text, active, alert, href }: ISidebarItem) => {
         <div
           className={`
           absolute left-full rounded-md px-2 py-1 ml-6
-          bg-blue-100 text-blue-800 text-sm
+          bg-zinc-200 text-zinc-800 text-sm
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}
@@ -150,15 +151,21 @@ const Sidebar = ({ user }: { user: IUser }) => {
   const SIDEBAR_LINKS: ISidebarItem[] = React.useMemo(
     () => [
       {
+        text: "Home",
+        Icon: Grid2x2CheckIcon,
+        href: "/",
+        active: false
+      },
+      {
         text: "My Systems",
         Icon: Tv2Icon,
-        href: "/i/my-systems",
+        href: "/my-systems",
         active: pathname?.includes("my-systems")
       },
       {
         text: "Saved Systems",
         Icon: SaveIcon,
-        href: "/i/saved-systems",
+        href: "/saved-systems",
         active: pathname?.includes("saved-systems")
       }
     ],
@@ -190,7 +197,7 @@ const Sidebar = ({ user }: { user: IUser }) => {
 
           <div className="border-t flex flex-col p-3">
             {user.role === "admin" && (
-              <SidebarItem Icon={BarChartHorizontalIcon} text="Dashboard" href={"/i/dashboard"} active={pathname?.includes("dashboard")} />
+              <SidebarItem Icon={BarChartHorizontalIcon} text="Admin" href={"/admin"} active={pathname?.includes("dashboard")} />
             )}
             <UserInfo user={user} expanded={expanded} />
           </div>

@@ -18,7 +18,7 @@ const BuildCard = ({ build, children }: IBuildCardProps) => {
       {children}
       <CardContent className="flex my-2 justify-center cursor-pointer scale-95 hover:scale-100 h-60 transition">
         <Image
-          onClick={() => push(`/i/my-systems/${build.id}`)}
+          onClick={() => push(`/my-systems/${build.id}`)}
           alt={build.id}
           src={build.components.case?.image_url || "/default-case.png"}
           width={300}

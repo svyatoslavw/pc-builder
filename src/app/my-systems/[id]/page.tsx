@@ -2,8 +2,23 @@ import { Metadata } from "next"
 
 import { MySystemPage } from "@/_pages/my-systems"
 import { BuildService } from "@/entities/build/api/build.service"
+import { EnumSortBy } from "@/entities/filter/model/filter.types"
 import { UserService } from "@/entities/user/api/user.service"
 import { CREATOR, GITHUB_URL, SITE_KEYWORDS, SITE_NAME, SITE_URL } from "@/shared/lib/config/seo.config"
+import { EnumCategory } from "@/shared/lib/types"
+
+export type TypeProductDataFilters = {
+  component: EnumCategory
+  searchTerm?: string
+  sortBy?: EnumSortBy
+  minPrice?: string
+  maxPrice?: string
+  genderId?: string
+}
+
+export type TypeParamsFilters = {
+  searchParams: TypeProductDataFilters
+}
 
 export const metadata: Metadata = {
   icons: {
@@ -29,9 +44,9 @@ export const metadata: Metadata = {
   keywords: SITE_KEYWORDS
 }
 
-export default async function MySystem({ searchParams }: { searchParams: { [key: string]: string | string[] } }) {
-  const products = await BuildService.getAll(searchParams)
+export default async function MySystem({ searchParams }: TypeParamsFilters) {
+  const initialProducts = await BuildService.getAll(searchParams)
   const user = await UserService.getProfile()
 
-  return <MySystemPage products={products} user={user} />
+  return <MySystemPage initialProducts={initialProducts} user={user} />
 }

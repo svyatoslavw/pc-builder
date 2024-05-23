@@ -3,8 +3,8 @@
 import { revalidatePath, revalidateTag } from "next/cache"
 import * as z from "zod"
 
-import { LoginSchema } from "@/app/auth/hooks/useLoginForm"
-import { RegisterSchema } from "@/app/auth/hooks/useRegisterForm"
+import { LoginSchema } from "@/entities/user/ui/forms/useLoginForm"
+import { RegisterSchema } from "@/entities/user/ui/forms/useRegisterForm"
 import { createServerClient } from "@/shared/api/server"
 
 export async function login(data: z.infer<typeof LoginSchema>) {

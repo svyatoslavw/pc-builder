@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 
-import { DashboardPage } from "@/_pages/dashboard/DashboardPage"
+import { AdminPage } from "@/_pages/dashboard/AdminPage"
 import { createServerClient } from "@/shared/api/server"
 import { CREATOR, GITHUB_URL, SITE_KEYWORDS, SITE_NAME, SITE_URL } from "@/shared/lib/config/seo.config"
 import { IOrder } from "@/shared/lib/types"
@@ -8,7 +8,7 @@ import { DashboardHeader } from "@/widgets/DashboardHeader"
 
 export const metadata: Metadata = {
   title: {
-    absolute: `Dashboard - ${SITE_NAME}`,
+    absolute: `Admin - ${SITE_NAME}`,
     template: `%s | ${SITE_NAME}`
   },
   icons: {
@@ -42,12 +42,12 @@ async function getOrders() {
   return (orders as IOrder[]) || []
 }
 
-export default async function Dashboard() {
+export default async function Admin() {
   const orders = await getOrders()
   return (
     <main className="flex flex-col min-h-screen w-full items-start">
       <DashboardHeader />
-      <DashboardPage orders={orders} />
+      <AdminPage orders={orders} />
     </main>
   )
 }

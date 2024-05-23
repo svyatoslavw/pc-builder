@@ -1,4 +1,4 @@
-import { EnumSortBy } from "../../filter/model/filter.types"
+import { EnumSortBy, TypeProductDataFilters } from "../../filter/model/filter.types"
 
 import { createClient } from "@/shared/api/client"
 import { createServerClient } from "@/shared/api/server"
@@ -30,7 +30,6 @@ export const BuildService = {
 
     return (products as IProduct[]) || []
   },
-
   async getAllSystems() {
     const supabase = createClient()
 

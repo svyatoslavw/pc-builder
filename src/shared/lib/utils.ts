@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getBuildId(pathname: string) {
-  return pathname.replace(/^\/i\/my-systems\//, "")
+  return pathname.replace(/^\/my-systems\//, "")
 }
 
 export function getPrice({ processor, motherboard, memory, case: pcCase, graphics_card }: IComponent) {

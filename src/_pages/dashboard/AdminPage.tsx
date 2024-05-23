@@ -60,7 +60,7 @@ const data = [
   }
 ]
 
-const DashboardPage = ({ orders }: { orders: IOrder[] }) => {
+const AdminPage = ({ orders }: { orders: IOrder[] }) => {
   return (
     <>
       <div className="p-5 flex gap-5 w-full">
@@ -145,4 +145,4 @@ const DashboardPage = ({ orders }: { orders: IOrder[] }) => {
   )
 }
 
-export { DashboardPage }
+export { AdminPage }

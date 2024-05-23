@@ -2,13 +2,13 @@
 
 import { Toaster } from "react-hot-toast"
 
-import { LoginForm } from "@/app/auth/components/LoginForm"
-import { RegisterForm } from "@/app/auth/components/RegisterForm"
+import { LoginForm } from "./LoginForm"
+import { RegisterForm } from "./RegisterForm"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs"
 
 const AuthForm = () => {
   return (
-    <section className="flex justify-center items-center h-screen">
+    <section className="flex justify-center w-full items-center min-h-screen">
       <div className="min-w-[400px] border p-3 rounded-xl">
         <div className="w-full space-y-3">
           <Tabs defaultValue="login" className="w-full">

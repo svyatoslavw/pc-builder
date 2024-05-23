@@ -52,7 +52,7 @@ async function updateSystemVibibility(system: IBuild) {
 }
 
 const ShareSystem = ({ build }: { build: IBuild }) => {
-  const link = window.location.origin + "/i/systems/" + build.id
+  const link = window.location.origin + "/systems/" + build.id
 
   const shareSystemhandler = () => {
     window.navigator.clipboard.writeText(link)

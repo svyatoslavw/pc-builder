@@ -6,7 +6,7 @@ export default function NotFound() {
       <h1 className="text-8xl font-semibold">404!</h1>
       <div className={"text-center"}>
         <p className="text-xl">This page does not exist</p>
-        <Link href="/i/my-systems" className="my-4 text-xs underline underline-offset-2">
+        <Link href="/" className="my-4 text-xs underline underline-offset-2">
           Go back to the dashboard page
         </Link>
       </div>

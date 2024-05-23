@@ -39,12 +39,6 @@ export const useFilter = () => {
     }
   }, [updateParams])
 
-  useEffect(() => {
-    searchParams?.forEach((value, key) => {
-      updateParams(key as keyof TypeProductDataFilters, value)
-    })
-  }, [updateParams, searchParams])
-
   const values = useMemo(() => queryParams, [queryParams])
 
   return { updateQueryParams: updateParams, queryParams: values, isFilterUpdated }

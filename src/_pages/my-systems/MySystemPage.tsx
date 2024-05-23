@@ -10,11 +10,11 @@ import { DashboardHeader } from "@/widgets/DashboardHeader"
 import { ProductList } from "@/widgets/ProductList"
 
 interface ISystemPage {
-  products: IProduct[]
+  initialProducts: IProduct[]
   user: IUser
 }
 
-const MySystemPage = ({ products, user }: ISystemPage) => {
+const MySystemPage = ({ initialProducts, user }: ISystemPage) => {
   return (
     <main className="w-full">
       <div className="flex w-full">
@@ -36,7 +36,7 @@ const MySystemPage = ({ products, user }: ISystemPage) => {
             <SortByFilter />
             <PriceFilter />
           </Filter>
-          <ProductList products={products} />
+          <ProductList initialProducts={initialProducts} />
         </Card>
       </Card>
     </main>

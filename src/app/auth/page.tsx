@@ -1,7 +1,8 @@
 import { Metadata } from "next"
 import React from "react"
 
-import { AuthForm } from "./components/AuthForm"
+import { AuthForm } from "../../entities/user/ui/forms/AuthForm"
+
 import { CREATOR, GITHUB_URL, SITE_KEYWORDS, SITE_NAME, SITE_URL } from "@/shared/lib/config/seo.config"
 
 export const metadata: Metadata = {
