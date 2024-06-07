@@ -39,9 +39,9 @@ export default async function SavedSystems() {
   const systems = await BuildService.getSystemsByUserId(user.id)
 
   return (
-    <main className="w-full">
+    <main className="w-full overflow-hidden">
       <DashboardHeader />
-      <div className="grid grid-cols-3 w-full gap-5 p-5">
+      <div className="grid filter 2xl:grid-cols-3 xl:grid-cols-2 grid-cols-1 overflow-auto w-full gap-5 p-5">
         {systems.length ? (
           systems.map((system) => <SavedBuildItem build={system} key={system.id} />)
         ) : (

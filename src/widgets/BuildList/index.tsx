@@ -10,7 +10,7 @@ const BuildList = () => {
   const builds = useTypedSelector((state) => state.builds)
   return (
     <Card className="filter border-none shadow-none overflow-y-auto rounded-none w-full p-5">
-      <CardContent className="grid grid-cols-custom p-0 gap-5 overflow-y-auto">
+      <CardContent className="grid 2xl:grid-cols-custom xl:grid-cols-custom grid-cols-2 p-0 gap-5 overflow-y-auto">
         {builds.length ? (
           builds.map((build) => <BuildItem key={build.id} build={build} />)
         ) : (

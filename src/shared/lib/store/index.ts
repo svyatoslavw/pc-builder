@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit"
+import { combineReducers, configureStore, createSelector } from "@reduxjs/toolkit"
 import { persistStore } from "redux-persist"
 
 import { buildSlice } from "@/entities/build/model/build.slice"
@@ -40,3 +40,4 @@ export const store = configureStore({
 export const persistor = persistStore(store)
 
 export type TypeRootState = ReturnType<typeof combinedReducers>
+export const createAppSelector = createSelector.withTypes<TypeRootState>()

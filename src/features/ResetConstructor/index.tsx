@@ -8,7 +8,7 @@ import { useActions } from "@/shared/lib/hooks"
 import { getBuildId } from "@/shared/lib/utils"
 import { Button } from "@/shared/ui/button"
 
-const ResetConctructor = () => {
+const ResetConstructor = () => {
   const { resetConstructor } = useActions()
 
   const pathname = usePathname() || ""
@@ -21,11 +21,11 @@ const ResetConctructor = () => {
   }
 
   return (
-    <Button variant={"outline"} onClick={resetConctructorHandler} className="flex gap-1 text-gray-500">
+    <Button variant={"ghost"} onClick={resetConctructorHandler} className="flex gap-1 text-gray-500">
       <Trash2Icon />
-      Reset Components
+      <span className="2xl:flex xl:flex lg:flex hidden">Reset Components</span>
     </Button>
   )
 }
 
-export { ResetConctructor }
+export { ResetConstructor }

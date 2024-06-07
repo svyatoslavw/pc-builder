@@ -15,7 +15,7 @@ const config = {
     },
     extend: {
       gridTemplateColumns: {
-        custom: "repeat(5, minmax(0, 0.9fr))"
+        custom: "repeat(4, minmax(0, 0.9fr))"
       },
       colors: {
         border: "hsl(var(--border))",

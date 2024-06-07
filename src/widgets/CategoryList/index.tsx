@@ -1,4 +1,12 @@
-import { EnumCategory } from "@/shared/lib/types"
+"use client"
+
+import { createSelector } from "@reduxjs/toolkit"
+import { usePathname } from "next/navigation"
+
+import { useTypedSelector } from "@/shared/lib/hooks"
+import { useFilter } from "@/shared/lib/hooks/useFilters"
+import { EnumCategory, IBuild, ICategory } from "@/shared/lib/types"
+import { getBuildId } from "@/shared/lib/utils"
 import { CategoryItem } from "@/widgets/CategoryItem"
 
 const PC_COMPONENTS = [
@@ -8,18 +16,35 @@ const PC_COMPONENTS = [
   { id: "45543dfdc343", name: "Memory", table: EnumCategory.MEMORY },
   { id: "45643dasdfre", name: "Power Supply", table: EnumCategory.POWERSUPPLY },
   { id: "32432432423", name: "Hard Drive", table: EnumCategory.HARDDRIVE },
-  { id: "45643dasdfre", name: "SSD", table: EnumCategory.SSD },
+  { id: "wefewf", name: "SSD", table: EnumCategory.SSD },
   { id: "4t4tfewrf43", name: "Case", table: EnumCategory.CASE },
-  { id: "45643dasdfre", name: "Operating System", table: EnumCategory.OS }
+  { id: "fewfewfewfew", name: "Operating System", table: EnumCategory.OS }
 ]
 
+const selectBuildById = createSelector(
+  (state) => state.builds,
+  (_, id) => id,
+  (builds, id) => builds.find((item: IBuild) => item.id === id)
+)
+
 const CategoryList = () => {
+  const { updateQueryParams } = useFilter()
+
+  const pathname = usePathname() ?? ""
+  const id = getBuildId(pathname)
+
+  const build = useTypedSelector((state) => selectBuildById(state, id))
+
+  const selectCategoryHandler = (table: ICategory["table"]) => {
+    updateQueryParams("component", table)
+  }
+
   return (
-    <div className="flex flex-col gap-1 my-2">
+    <span className="flex flex-col gap-1 my-2">
       {PC_COMPONENTS.map((category) => (
-        <CategoryItem category={category} key={category.id} />
+        <CategoryItem build={build} selectCategoryHandler={selectCategoryHandler} category={category} key={category.id} />
       ))}
-    </div>
+    </span>
   )
 }
 

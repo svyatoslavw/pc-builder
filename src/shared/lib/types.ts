@@ -8,100 +8,56 @@ export interface ISidebarItem {
   href: string
 }
 
-export interface IProcessor {
+interface BaseComponent {
   id: string
   name: string
   price: number
   image_url: string
   rating: number
   in_stock: boolean
+}
+
+export interface IProcessor extends BaseComponent {
   cores: string
   threads: string
   ghz: number
 }
 
-export interface IMotherboard {
-  id: string
-  name: string
-  price: number
-  image_url: string
-  rating: number
-  in_stock: boolean
+export interface IMotherboard extends BaseComponent {
   sockets: string
   chipset: string
   compatible_ram: string
 }
-export interface IMemory {
-  id: string
-  name: string
-  price: number
-  image_url: string
-  rating: number
-  in_stock: boolean
+export interface IMemory extends BaseComponent {
   size: number
   type: string
   ghz: number
 }
 
-export interface IGraphicsCard {
-  id: string
-  name: string
-  price: number
-  image_url: string
-  rating: number
-  in_stock: boolean
+export interface IGraphicsCard extends BaseComponent {
   cooling: string
   memory_size: string
   memory_type: string
 }
 
-export interface IHardDrive {
-  id: string
-  name: string
-  price: number
-  image_url: string
-  rating: number
+export interface IHardDrive extends BaseComponent {
   in_stock: boolean
   drive_size: string
 }
 
-export interface ISsd {
-  id: string
-  name: string
-  price: number
-  image_url: string
-  rating: number
-  in_stock: boolean
+export interface ISsd extends BaseComponent {
   ssd_size: string
 }
 
-export interface IPowerSupply {
-  id: string
-  name: string
-  price: number
-  image_url: string
-  rating: number
-  in_stock: boolean
+export interface IPowerSupply extends BaseComponent {
   watt: string
 }
 
-export interface ICase {
-  id: string
-  name: string
-  price: number
-  image_url: string
-  rating: number
-  in_stock: boolean
+export interface ICase extends BaseComponent {
   form_factor: string
 }
 
-export interface IOs {
-  id: string
-  name: string
-  price: number
-  image_url: string
-  rating: number
-  in_stock: boolean
+export interface IOs extends BaseComponent {
   windows: string
 }
 
@@ -143,7 +99,6 @@ export interface IBuild {
   name: string
   components: IComponent
   total: number
-  success?: boolean
 }
 
 export interface ISystem {

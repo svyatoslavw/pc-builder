@@ -4,7 +4,7 @@ import type { IProduct } from "@/shared/lib/types"
 
 const ProductItem = ({ product }: { product: IProduct }) => {
   return (
-    <ProductCard product={product}>
+    <ProductCard key={product.id} product={product}>
       <AddToConstructor product={product} />
     </ProductCard>
   )

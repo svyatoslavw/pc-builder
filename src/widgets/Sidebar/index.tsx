@@ -60,11 +60,11 @@ const UserInfo = ({ expanded, user }: { expanded: boolean; user: IUser }) => {
           />
           <div
             className={cn("flex justify-between items-center overflow-hidden transition-all", {
-              ["w-44 ml-3"]: expanded,
+              ["2xl:w-44 xl:w-44 w-0 2xl:ml-3 xl:ml-3 m-0"]: expanded,
               ["w-0"]: !expanded
             })}
           >
-            <div className="leading-4">
+            <div className="leading-4 2xl:inline xl:inline hidden">
               <h4 className="font-semibold">Welcome!</h4>
               <span className="text-xs text-gray-600">{user.email}</span>
             </div>
@@ -112,9 +112,9 @@ const SidebarItem = ({ Icon, text, active, alert, href }: ISidebarItem) => {
         })}
       />
       <span
-        className={cn("ml-3 text-sm flex-1 overflow-hidden text-gray-500 font-medium transition-all", {
+        className={cn("2xl:ml-3 xl:ml-3 m-0 text-sm flex-1 overflow-hidden text-gray-500 font-medium transition-all", {
           ["text-gray-800 font-semibold"]: active,
-          ["w-44 ml-3 z-50"]: expanded,
+          ["w-44 2xl:inline xl:inline hidden 2xl:ml-3 xl:ml-3 ml-0 z-50"]: expanded,
           ["hidden m-0"]: !expanded
         })}
       >
@@ -173,12 +173,13 @@ const Sidebar = ({ user }: { user: IUser }) => {
   )
 
   return (
-    <aside className="h-screen">
+    <aside className="min-h-screen">
       <Card className="h-full flex flex-col border-t-0 rounded-none shadow-none">
         <CardTitle className="p-4 mb-4 h-16 flex border-b justify-between text-xl font-bold transition w-full items-center">
           <span
-            className={cn("text-2xl font-bold transition w-full", {
-              ["hidden"]: !expanded
+            className={cn("2xl:text-2xl font-bold transition w-full", {
+              ["hidden"]: !expanded,
+              ["2xl:inline xl:inline hidden"]: expanded
             })}
           >
             PC Builder

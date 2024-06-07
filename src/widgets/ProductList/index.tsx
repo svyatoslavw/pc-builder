@@ -42,7 +42,7 @@ const ProductList = ({ initialProducts }: ProductListProps) => {
   })
 
   return (
-    <CardContent className="overflow-y-auto grid grid-cols-4 gap-6 p-0">
+    <CardContent className="overflow-y-auto grid 2xl:grid-cols-4 lg:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 gap-6 p-0">
       {!isFetching ? (
         products.length ? (
           products.map((products) => <ProductItem product={products} key={products.id} />)

@@ -14,9 +14,6 @@ const SaveSystem = ({ user }: { user: IUser }) => {
   const systems = useTypedSelector((state) => state.builds)
   const pathname = usePathname()
 
-  if (!pathname) return null
-  if (!user) return
-
   const id = getBuildId(pathname)
   const system = systems.find((item) => item.id === id)
   if (!system) return
