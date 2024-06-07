@@ -99,6 +99,7 @@ export interface IBuild {
   name: string
   components: IComponent
   total: number
+  success?: boolean
 }
 
 export interface ISystem {
