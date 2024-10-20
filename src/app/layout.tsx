@@ -40,7 +40,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <main className="flex">
+          <main className="flex w-full flex-col">
             <Sidebar user={user} />
             {children}
           </main>

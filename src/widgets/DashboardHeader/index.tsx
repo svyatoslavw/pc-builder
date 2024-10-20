@@ -11,18 +11,12 @@ const DashboardHeader = React.forwardRef<HTMLOListElement, React.HTMLAttributes<
   return (
     <Breadcrumb className="rounded-none flex justify-between w-full border-b h-16 px-6 items-center">
       <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
-        </BreadcrumbItem>
         {pathname && pathname.slice(3) !== "dashboard" && (
-          <>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href={`/${pathname.split("/")[1]}`} className="capitalize">
-                {pathname.split("/")[1].replace("-", " ")}
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </>
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/${pathname.split("/")[1]}`} className="capitalize">
+              {pathname.split("/")[1].replace("-", " ")}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
         )}
         {pathname && pathname.slice(3).includes("systems") && (
           <>

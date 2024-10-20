@@ -12,6 +12,15 @@ const nextConfig = {
         protocol: "https"
       }
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/my-systems/",
+        permanent: true
+      }
+    ]
   }
 }
 
